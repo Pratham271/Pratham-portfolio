@@ -4,7 +4,7 @@ import { HoverBorderGradient } from '../ui/hover-border-gradient'
 
 const Button = () => {
     const openPDF = () => {
-        const pdfUrl = '/resume.pdf'; 
+        const pdfUrl = '/Resume.pdf'; 
         window.open(pdfUrl, '_blank');
       };
     
