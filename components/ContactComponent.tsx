@@ -4,7 +4,7 @@ import Form from './helper/Form'
 
 const ContactComponent = async() => {
   return (
-    <div className="h-full mt-3 w-full bg-black flex flex-col items-center justify-center  rounded-md">
+    <div className="h-full mt-6 lg:mt-0 w-full bg-black flex flex-col items-center justify-center  rounded-md">
       <h1 className="text-3xl md:text-5xl font-bold text-center text-white relative ">
         Let&apos;s Connect
       </h1>

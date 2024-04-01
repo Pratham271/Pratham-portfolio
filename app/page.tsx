@@ -18,7 +18,7 @@ export default function Home() {
         <img src="avatar.png" alt="" className='flex flex-col w-full h-full object-cover'/>
         </div>
         <p className="text-neutral-500 mt-8 text-lg max-w-3xl mx-auto my-8  text-center relative z-10">
-          Greetings! I'm Pratham Chauhan, a recent B-Tech graduate from The NorthCap University in Computer Science, specializing in crafting captivating and user-centric digital experiences. My journey in web development is driven by a fervent passion for innovation and a dedication to excellence. I bring to the table a comprehensive skill set encompassing both front-end and back-end development, empowering me to transform concepts into seamless and dynamic web solutions. Currently interested in AI and an active contributor in Open Source
+          Greetings! I&apos;m Pratham Chauhan, a recent B-Tech graduate from The NorthCap University in Computer Science, specializing in crafting captivating and user-centric digital experiences. My journey in web development is driven by a fervent passion for innovation and a dedication to excellence. I bring to the table a comprehensive skill set encompassing both front-end and back-end development, empowering me to transform concepts into seamless and dynamic web solutions. Currently interested in AI and an active contributor in Open Source
         </p>
       </div>
       <BackgroundBeams />

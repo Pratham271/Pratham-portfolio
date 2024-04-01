@@ -6,7 +6,7 @@ import React from 'react'
 
 const Projects = () => {
   return (
-  <div>
+  <div className='bg-black'>
       <NavBar/>
       <div className="min-h-screen relative w-full bg-black mt-0 overflow-scroll rounded-md">
       
