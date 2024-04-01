@@ -27,10 +27,8 @@ const TechComponent = () => {
     <div>
     <div className="flex flex-row flex-wrap absolute top-44  md:static justify-center gap-10">
     {technologies.map((technology, index) => (
-  <div className="w-28 h-28" key={index}>
-    
+  <div className="w-28 h-28" key={technology.name}>
       <BallCanvas imgUrl={technology.icon.src}/>
-    
   </div>
 ))}
 
