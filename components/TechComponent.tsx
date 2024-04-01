@@ -8,7 +8,7 @@ import { technologies } from '@/constants';
 import BallCanvas from '@/components/ui/BallCanvas';
 const TechComponent = () => {
   return (
-    <div>
+    <div className='h-[90rem] bg-black/[0.96]'>
       <div className="h-[21rem] lg:h-[30rem] w-full rounded-md flex flex-col md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
       <Spotlight
         className="-top-20 left-0 lg:left-96 lg:-top-20"
