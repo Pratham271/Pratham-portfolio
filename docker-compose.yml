@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  nextapp:
+    build: .
+    container_name: nextjs_application
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/pratham/src/app
+
+volumes:
+  .:
