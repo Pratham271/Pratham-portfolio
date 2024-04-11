@@ -131,7 +131,7 @@ import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, 
     {
       name: "Settle",
       description:
-        "Web-based platform that allows users to pay their friends and family in a secure fashion. With Settle, settle all your payments",
+        "Web-based platform that allows users to pay their friends and family in a secure fashion. With Settle, settle all your payments.",
       isDeployed: false,
       deployedLink: "",
 
@@ -142,7 +142,7 @@ import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, 
     {
       name: "Write.it",
       description:
-        "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too. You can also ask our in house writeAI to help you write",
+        "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.",
         isDeployed: false,
         deployedLink: "",
 
