@@ -142,7 +142,7 @@ import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, 
     {
       name: "Write.it",
       description:
-        "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.",
+        "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.You can ask the inhouse AI to write a blog for you and it will get you title, content and even and image for you",
         isDeployed: false,
         deployedLink: "",
 
@@ -150,9 +150,9 @@ import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, 
       github_link: "https://github.com/Pratham271/write.it",
     },
     {
-      name: "100xEngineer",
+      name: "EnigmaAI",
       description:
-        "An AI based chatbot built using langchainJs and MistralAI that can help you solve your problems.",
+        "An AI based chatbot built using langchainJs, GroqAI, Vercel ai/sdk and many more that can help you solve your problems, find relevant image and videos and even generate followup questions",
         isDeployed: false,
         deployedLink: "",
 
