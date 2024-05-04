@@ -131,7 +131,7 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
       name: "EnigmaAI",
       description:
-        "An AI based chatbot built using langchainJs, GroqAI, Vercel ai/sdk and many more that can help you solve your problems, find relevant image and videos and even generate followup questions",
+        "An AI based chatbot built using langchainJs, GroqAI, Vercel ai/sdk and many more that can help you solve your problems, find relevant image and videos and even generate followup questions.",
         isDeployed: false,
         deployedLink: "",
 
@@ -160,7 +160,7 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
       name: "Write.it",
       description:
-        "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.You can ask the inhouse AI to write a blog for you and it will get you title, content and even and image for you",
+        "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.You can ask the inhouse AI to write a blog for you and it will get you title, content and even and image for you.",
         isDeployed: false,
         deployedLink: "",
 
@@ -170,7 +170,7 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
         name: "Link Shrink",
         description:
-          "Don't copy paste the large url just shrink it using Link-Shrink an in house link shortener built without using any external library",
+          "Don't copy paste the large url just shrink it using Link-Shrink an in house link shortener built without using any external library.",
         isDeployed: true,
         deployedLink: "https://link-shrink-eta.vercel.app/",
         image: LinkShrink,
