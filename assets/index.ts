@@ -15,6 +15,7 @@ import prisma from './tech/primsa.png'
 import nextjs from './tech/nextjs.png'
 import postgres from './tech/postgres.png'
 import turborepo from './tech/turborepo.png'
+import chatpdf from './Chatpdf.png'
 
 export {
     Settle, 
@@ -33,6 +34,7 @@ export {
     prisma,
     nextjs,
     postgres,
-    turborepo
+    turborepo,
+    chatpdf
     
 }
