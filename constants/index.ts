@@ -1,4 +1,4 @@
-import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, postgres, prisma, recoil, Settle, tailwind, turborepo, typescript, WriteIt , } from "@/assets";
+import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern, nextjs, postgres, prisma, recoil, Settle, tailwind, turborepo, typescript, WriteIt , } from "@/assets";
 
   
   export const navLinks = [
@@ -129,6 +129,16 @@ import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, 
   
   const projects = [
     {
+      name: "EnigmaAI",
+      description:
+        "An AI based chatbot built using langchainJs, GroqAI, Vercel ai/sdk and many more that can help you solve your problems, find relevant image and videos and even generate followup questions",
+        isDeployed: false,
+        deployedLink: "",
+
+      image: AIModel,
+      github_link: "https://github.com/Pratham271/100xengineer/tree/initial-setup",
+    },
+    {
       name: "Settle",
       description:
         "Web-based platform that allows users to pay their friends and family in a secure fashion. With Settle, settle all your payments.",
@@ -140,6 +150,14 @@ import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, 
       
     },
     {
+      name: "Chatpdf",
+      description: "An AI chatbot that quickly scan your pdf's and deliver the answers you need, saving you valuable time and frustration.",
+      isDeployed: true,
+      deployedLink: "https://enigma-chatpdf.vercel.app",
+      image: chatpdf,
+      github_link: "https://x.com/Pratham9474/status/1785692798487814647"
+    },
+    {
       name: "Write.it",
       description:
         "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.You can ask the inhouse AI to write a blog for you and it will get you title, content and even and image for you",
@@ -148,16 +166,6 @@ import { AIModel, css, docker, git, html, javascript, LinkShrink, mern, nextjs, 
 
       image: WriteIt,
       github_link: "https://github.com/Pratham271/write.it",
-    },
-    {
-      name: "EnigmaAI",
-      description:
-        "An AI based chatbot built using langchainJs, GroqAI, Vercel ai/sdk and many more that can help you solve your problems, find relevant image and videos and even generate followup questions",
-        isDeployed: false,
-        deployedLink: "",
-
-      image: AIModel,
-      github_link: "https://github.com/Pratham271/100xengineer/tree/initial-setup",
     },
     {
         name: "Link Shrink",
