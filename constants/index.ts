@@ -155,7 +155,7 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
       isDeployed: true,
       deployedLink: "https://enigma-chatpdf.vercel.app",
       image: chatpdf,
-      github_link: "https://x.com/Pratham9474/status/1785692798487814647"
+      github_link: "https://github.com/Pratham271/Chatpdf"
     },
     {
       name: "Write.it",
