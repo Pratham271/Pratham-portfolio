@@ -161,8 +161,8 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
       name: "Write.it",
       description:
         "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.You can ask the inhouse AI to write a blog for you and it will get you title, content and even and image for you.",
-        isDeployed: false,
-        deployedLink: "",
+        isDeployed: true,
+        deployedLink: "https://write-with-ai.vercel.app/",
 
       image: WriteIt,
       github_link: "https://github.com/Pratham271/write.it",
