@@ -84,8 +84,6 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
       title: "Web Developer",
       company_name: "ISRO",
-      // icon: Isro,
-      // iconBg: "#383E56",
       date: "October 2022 - April 2023",
       points: [
         "Developed a web-based dashboard for disaster management as there was no prior single platform for showcasingeverything under one hood. Leveraged skills in web development, GIS (Geographic Information System), and data visualization to create a comprehensive and user-friendly dashboard for disaster management purposes during my internship at ISRO.",
@@ -100,8 +98,6 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
       title: "Project Intern",
       company_name: "Dreamsol",
-      // icon: Dreamsol,
-      // iconBg: "#E6DEDD",
       date: "July 2022 - September 2022",
       points: [
         "Developed a robust web application using Spring and Hibernate technologies to manage employee data efficiently",
@@ -113,8 +109,6 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
       title: "Intern",
       company_name: "VLCC",
-      // icon: Vlcc,
-      // iconBg: "#383E56",
       date: "Jun 2022 - July 2022",
       points: [
         "Managed the ERP of the company.",
