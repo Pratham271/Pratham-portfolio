@@ -6,14 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "generate": "npx ts-node ./scripts/generate.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@datastax/astra-db-ts": "^1.2.0",
     "@emailjs/browser": "^4.3.3",
     "@langchain/cohere": "^0.0.10",
     "@langchain/community": "^0.2.1",
+    "@langchain/pinecone": "^0.0.6",
+    "@pinecone-database/pinecone": "^2.2.1",
     "@radix-ui/react-label": "^2.0.2",
     "@react-three/drei": "^9.103.0",
     "@react-three/fiber": "^8.16.1",
