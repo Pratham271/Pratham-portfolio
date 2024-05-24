@@ -1,8 +1,9 @@
 // Input component extends from shadcnui - https://ui.shadcn.com/docs/components/input
 "use client";
 import * as React from "react";
-import { cn } from "@/utils/cn";
+
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
+import { cn } from "@/utils/cn";
 
 export interface InputProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}

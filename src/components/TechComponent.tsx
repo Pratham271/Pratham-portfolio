@@ -2,10 +2,10 @@
 import React from 'react'
 import { Spotlight } from '@/components/ui/Spotlight'
 
-import { cn } from "@/utils/cn";
 import NavBar from '@/components/NavBar';
 import { technologies } from '@/constants';
 import BallCanvas from '@/components/ui/BallCanvas';
+import { cn } from '@/utils/cn';
 const TechComponent = () => {
   return (
     <div className='h-[90rem] bg-black/[0.96]'>
