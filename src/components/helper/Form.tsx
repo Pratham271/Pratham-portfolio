@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "@radix-ui/react-label";
-import { cn } from "@/utils/cn";
 import emailjs from '@emailjs/browser'
 import {
   IconBrandGithub,
@@ -11,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Textarea } from "../ui/textarea";
 import Alert from "../ui/Alert";
+import { cn } from "@/utils/cn";
 
 export default function Form() {
    
