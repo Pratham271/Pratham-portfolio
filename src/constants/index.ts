@@ -166,7 +166,7 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
         description:
           "Don't copy paste the large url just shrink it using Link-Shrink an in house link shortener built without using any external library.",
         isDeployed: true,
-        deployedLink: "https://link-shrink-eta.vercel.app/",
+        deployedLink: "https://link-shrink-5el0.vercel.app/",
         image: LinkShrink,
         github_link: "https://github.com/Pratham271/Url-shortener-frontend",
         

@@ -17,4 +17,4 @@ async function generateEmbeddings(){
     console.log(docs)
 }
 
-generateEmbeddings().catch(console.error);;
+generateEmbeddings().catch(console.error);
