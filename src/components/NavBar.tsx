@@ -4,7 +4,8 @@ import Button from './helper/Button'
 import Hamburger from './helper/Hamburger';
 import Link from 'next/link';
 import { navLinks } from '@/constants';
-
+import { Bot } from 'lucide-react';
+import AIChatButton from './helper/AIChatButton';
 
 
 const NavBar = () => {
@@ -13,7 +14,7 @@ const NavBar = () => {
   return (
     <div className='z-50'>
         <div className='flex justify-between text-white '>
-            <div className='hidden lg:flex px-12 pt-4 w-full'>
+            <div className='hidden lg:flex px-12 pt-4 w-full items-center'>
                 {
                   navLinks.map((link)=> (
                     <div className='lg:ml-4' key={link.id}><Link href={link.id}>{link.title}</Link></div>
@@ -31,8 +32,11 @@ const NavBar = () => {
                 </ul>
               </div>
             </div>
-            <div className='lg:px-12 px-8 pt-2.5'>
+            <div className='lg:px-12 px-8 pt-2.5 '>
+                <div className='flex items-center '>
+                <AIChatButton/>
                 <Button/>
+                </div>
             </div>
         </div>
     </div>
