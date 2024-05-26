@@ -9,7 +9,7 @@ const Button = () => {
       };
     
   return (
-    <div className="flex justify-center text-center">
+    <div className="flex justify-center text-center pl-3">
       <HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
