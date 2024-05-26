@@ -13,7 +13,7 @@ const Button = () => {
       <HoverBorderGradient
         containerClassName="rounded-full"
         as="button"
-        className="bg-black text-white flex items-center space-x-2"
+        className=" bg-transparent  text-white flex items-center space-x-2"
         onClick={openPDF}
       >
         <span> Resume</span>
