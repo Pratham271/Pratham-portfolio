@@ -1,13 +1,17 @@
-import { CohereEmbeddings } from "@langchain/cohere";
+import { PremEmbeddings } from "@langchain/community/embeddings/premai";
 import { Pinecone } from '@pinecone-database/pinecone';
 import { PineconeStore } from "@langchain/pinecone";
 
-export const embeddings = new CohereEmbeddings({
-    apiKey: process.env.COHERE_API_KEY, // In Node.js defaults to process.env.COHERE_API_KEY
-    batchSize: 96, // Default value if omitted is 48. Max value is 96
-});
+
 export async function getVectorStore(){
- 
+    const embeddings = new PremEmbeddings({
+        // In Node.js defaults to process.env.PREM_API_KEY
+        apiKey: process.env.PREM_API_KEY,
+        // In Node.js defaults to process.env.PREM_PROJECT_ID
+        project_id: 1744,
+        model: "text-embedding-3-large", // The model to generate the embeddings
+      });
+      
     const pineconeClient = new Pinecone({
         apiKey: process.env.PINECONE_API_KEY!
     });
