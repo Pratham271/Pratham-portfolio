@@ -13,7 +13,7 @@ interface ChatMessageProps {
     isLoading?: boolean;
   }
 
-async function myAction(userMessage: string, prevMessages:ChatMessageProps[]): Promise<any>{
+async function myAction(userMessage: string): Promise<any>{
     "use server"
     const streamable = createStreamableValue({});
 
@@ -24,34 +24,27 @@ async function myAction(userMessage: string, prevMessages:ChatMessageProps[]): P
         console.log(result)
         const results = await vectorStore.similaritySearch(userMessage, 4);
 
-        const formattedPrevMessages = prevMessages ? prevMessages.map((msg) => ({
-            role: msg.role,
-            content: msg.content,
-          })) : [];
+        // const formattedPrevMessages = prevMessages ? prevMessages.map((msg) => ({
+        //     role: msg.role,
+        //     content: msg.content,
+        //   })) : [];
 
         const chatCompletion = await openai.chat.completions.create({
             messages: 
         [{
             role: "system",
-            content: `Use the following pieces of context (or previous conversaton if needed) to answer the users question in markdown format.`
+            content: `Use the following pieces of context to answer the users question in markdown format.`
         },
         {
             role: "user",
-            content: `You are a chatbot, named Jarvis , for a personal portfolio website of Pratham Chauhan. You impersonate the website's owner. Use the following pieces of context (or previous conversaton if needed) to answer the question at the end. Whenever it makes sense, provide links to pages that contain more information about the topic from the given context.
+            content: `You are a chatbot, named Jarvis , for a personal portfolio website of Pratham Chauhan. You impersonate the website's owner. Use the following pieces of context to answer the question at the end. Whenever it makes sense, provide links to pages that contain more information about the topic from the given context.
             If you don't know the answer, just say you don't know. DO NOT try to make up an answer. DO NOT give the answer if it is not related to the context
             If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
 
-            \n----------------\n
-          
-            PREVIOUS CONVERSATION:
-            ${formattedPrevMessages.map((message) => {
-              if (message.role === "user") return `User: ${message.content}\n`;
-              return `Assistant: ${message.content}\n`;
-            })}
                 
             \n----------------\n
             CONTEXT:
-          ${results.map((r) => r.pageContent).join("\n\n")}
+          ${results.map((r:any) => r.pageContent).join("\n\n")}
           
           USER INPUT: ${userMessage}`,
           
@@ -61,7 +54,7 @@ async function myAction(userMessage: string, prevMessages:ChatMessageProps[]): P
     
     stream: true,
     model: "llama3-70b-8192",
-    });
+    })
 
     for await (const chunk of chatCompletion) {
         if (chunk.choices[0].delta && chunk.choices[0].finish_reason !== "stop") {

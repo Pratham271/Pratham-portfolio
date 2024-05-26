@@ -22,8 +22,7 @@ export default function Home() {
       </div>
       <BackgroundBeams />
     </div>
-    </div>
-        
+    </div>  
     </div>
   );
 }
