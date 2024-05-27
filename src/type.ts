@@ -10,3 +10,9 @@ export interface Props{
     open: boolean
     onClose: () => void
 }
+
+export interface StreamMessage {
+    userMessage?: string;
+    llmResponse?: string;
+    llmResponseEnd?: boolean;
+  }
