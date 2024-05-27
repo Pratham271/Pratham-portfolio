@@ -1,13 +1,13 @@
 'use client';
 import { cn } from '@/utils/cn'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Bot, XCircle } from "lucide-react";
 import ChatForm from './helper/ChatForm';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loadingAtom, userInputAtom } from '@/store/atoms/userInput';
 import { type AI } from "../actions/chat";
 import { readStreamableValue, useActions } from "ai/rsc";
-import { Message, Props } from '@/type';
+import { Message, Props, StreamMessage } from '@/type';
 import LlmResponseComponent from './LlmResponseComponent';
 
 
@@ -16,13 +16,12 @@ const AIChatComponent = ({open, onClose}:Props) => {
   const setLoading = useSetRecoilState(loadingAtom)
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useRecoilState(userInputAtom)
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   useEffect(()=> {
    
-    if(messages.length>1){
-     window.scrollTo({
-       top: document.documentElement.scrollHeight,
-       behavior: 'smooth' // You can use 'auto' for an instant scroll
-     })
+   
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
    
  },[messages])
@@ -50,7 +49,26 @@ const AIChatComponent = ({open, onClose}:Props) => {
     let lastAppendResponse = "";
     try {
       setLoading(true)
-      await new Promise(resolve => setTimeout(resolve,1000))
+      const streamableValue = await myAction(userMessage,messages);
+      for await(const message of readStreamableValue(streamableValue)){
+        const typedMessage = message as StreamMessage
+        setMessages((prevMessages) => {
+          const messagesCopy = [...prevMessages]
+          const messageIndex = messagesCopy.findIndex(msg => msg.id === newMessageId)
+          if(messageIndex!==-1){
+            const currentMessage = messagesCopy[messageIndex]
+            if(typedMessage.llmResponse && typedMessage.llmResponse !== lastAppendResponse){
+              currentMessage.content += typedMessage.llmResponse;
+              lastAppendResponse = typedMessage.llmResponse
+            }
+            if(typedMessage.llmResponseEnd){
+              currentMessage.isStreaming = false;
+            }
+          }
+          return messagesCopy
+        })
+        
+      }
     } catch (error) {
       console.error("Error streaming data for user message: ",error)
     }finally{
@@ -67,7 +85,7 @@ const AIChatComponent = ({open, onClose}:Props) => {
         <XCircle size={30} className="rounded-full bg-background" />
       </button>
       <div className="flex h-[600px] flex-col rounded border bg-zinc-900 shadow-xl">
-        <div className="mt-3 h-full overflow-y-auto px-3">
+        <div className="mt-3 h-full overflow-y-auto px-3 mb-6" ref={scrollRef}>
           {messages && messages.length>0 && messages.map((message,index)=> (
             <div key={`message-${index}`} className='mt-4'>
               {message.type === 'user' && (
