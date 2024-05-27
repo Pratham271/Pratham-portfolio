@@ -1,4 +1,5 @@
 import { atom } from "recoil";
+import { Message } from '../../type';
 
 
 export const userInputAtom = atom({
@@ -6,7 +7,7 @@ export const userInputAtom = atom({
     default: ""
 })
 
-export const messagesAtom = atom({
-    key: "messagesAtom",
+export const loadingAtom = atom({
+    key: "loadingAtom",
     default: []
 })

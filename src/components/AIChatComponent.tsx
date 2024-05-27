@@ -1,17 +1,51 @@
 'use client';
 import { cn } from '@/utils/cn'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Bot, XCircle } from "lucide-react";
 import ChatForm from './helper/ChatForm';
-import { useRecoilValue } from 'recoil';
-import { messagesAtom } from '@/store/atoms/userInput';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { loadingAtom, userInputAtom } from '@/store/atoms/userInput';
+import { type AI } from "../actions/chat";
+import { readStreamableValue, useActions } from "ai/rsc";
+import { Message, Props } from '@/type';
 
-interface Props{
-    open: boolean
-    onClose: () => void
-}
+
 const AIChatComponent = ({open, onClose}:Props) => {
-  const messages = useRecoilValue(messagesAtom)
+  const {myAction} = useActions<typeof AI>();
+  const [loading, setLoading] = useRecoilState(loadingAtom)
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useRecoilState(userInputAtom)
+  useEffect(()=> {
+   
+    if(messages.length>1){
+     window.scrollTo({
+       top: document.documentElement.scrollHeight,
+       behavior: 'smooth' // You can use 'auto' for an instant scroll
+     })
+    }
+   
+ },[messages])
+
+  const handleFormSubmit = async() => {
+    const messageToSend = input.trim();
+    setInput('')
+    if(!messageToSend) return;
+    await handleUserMessageSubmission(messageToSend)
+  }
+
+  const handleUserMessageSubmission = async(userMessage:string) => {
+    if(!userMessage) return;
+    const newMessageId = Date.now()
+    const newMessage = {
+      id: newMessageId, 
+      type: 'userMessage',
+      userMessage: userMessage,
+      content: '',
+      isStreaming: true
+    };
+    setMessages(prevMessage =>[...prevMessage, newMessage]);
+  }
+
   return (
     <div className={cn(
         "bottom-0 right-0 z-50 w-full max-w-[500px] p-1 xl:right-0",
