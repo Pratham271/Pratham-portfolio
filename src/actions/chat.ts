@@ -1,10 +1,17 @@
 import OpenAI from 'openai';
 import { createAI, createStreamableValue } from "ai/rsc";
 import { getVectorStore } from '@/lib/pineconedb';
+import { Redis } from "@upstash/redis";
+import { UpstashRedisCache } from "@langchain/community/caches/upstash_redis";
 
 let openai = new OpenAI({
     baseURL: 'https://api.groq.com/openai/v1', // Default value
     apiKey: process.env.GROQ_API_KEY,
+});
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
 interface ChatMessageProps {
@@ -20,6 +27,17 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
     const streamable = createStreamableValue({});
 
     (async ()=> {
+      const cache = new UpstashRedisCache({
+        client: redis,
+      });
+
+      const cachedResponse = await cache.lookup(userMessage,process.env.GROQ_API_KEY!)
+      if (cachedResponse) {
+        // If cached response exists, return it immediately
+        streamable.update({ 'llmResponse': cachedResponse });
+        streamable.done({ status: 'done' });
+        return;
+    }
         const vectorStore = await getVectorStore()
 
         const result = await vectorStore.similaritySearch(userMessage,4)
@@ -65,15 +83,20 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
     stream: true,
     model: "llama3-70b-8192",
     })
-
+    let fullResponse = ''
     for await (const chunk of chatCompletion) {
         if (chunk.choices[0].delta && chunk.choices[0].finish_reason !== "stop") {
             // console.log(chunk.choices[0].delta)
           streamable.update({ 'llmResponse': chunk.choices[0].delta.content });
+          fullResponse += chunk.choices[0].delta.content;
         } else if (chunk.choices[0].finish_reason === "stop") {
           streamable.update({ 'llmResponseEnd': true });
+          const emptyGeneration:any = [];
+          const response = await cache.update(userMessage, process.env.GROQ_API_KEY!, emptyGeneration.concat({ content: fullResponse }));
         }
       }
+
+      
       streamable.done({ status: 'done' });
     })();
     return streamable.value
