@@ -1,3 +1,4 @@
+'use client';
 import { Bot } from 'lucide-react'
 import React, { useState } from 'react'
 import AIChatComponent from '../AIChatComponent'
