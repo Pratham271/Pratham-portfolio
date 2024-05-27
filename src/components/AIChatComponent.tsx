@@ -26,7 +26,8 @@ const AIChatComponent = ({open, onClose}:Props) => {
    
  },[messages])
 
-  const handleFormSubmit = async() => {
+  const handleFormSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     const messageToSend = input.trim();
     setInput('')
     if(!messageToSend) return;
@@ -38,12 +39,13 @@ const AIChatComponent = ({open, onClose}:Props) => {
     const newMessageId = Date.now()
     const newMessage = {
       id: newMessageId, 
-      type: 'userMessage',
+      type: 'user',
       userMessage: userMessage,
       content: '',
       isStreaming: true
     };
     setMessages(prevMessage =>[...prevMessage, newMessage]);
+    console.log(messages)
   }
 
   return (
@@ -69,7 +71,7 @@ const AIChatComponent = ({open, onClose}:Props) => {
             </div>
           )}
         </div>
-        <ChatForm/>
+        <ChatForm setMessages={setMessages} handleFormSubmit={handleFormSubmit}/>
       </div>
     </div>
   )
