@@ -8,9 +8,11 @@ let openai = new OpenAI({
 });
 
 interface ChatMessageProps {
-    role: string;
+    id: number;
+    type: string;
     content?: string;
-    isLoading?: boolean;
+    userMessage: string;
+    isStreaming: boolean;
   }
 
 async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): Promise<any>{
@@ -25,8 +27,9 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
         const results = await vectorStore.similaritySearch(userMessage, 4);
 
         const formattedPrevMessages = prevMessages ? prevMessages.map((msg) => ({
-            role: msg.role,
+            role: msg.type,
             content: msg.content,
+            userMessage: msg.userMessage
           })) : [];
 
         const chatCompletion = await openai.chat.completions.create({
@@ -45,7 +48,7 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
           
             PREVIOUS CONVERSATION:
           ${formattedPrevMessages.map((message) => {
-              if (message.role === "user") return `User: ${message.content}\n`;
+              if (message.role === "user") return `User: ${message.userMessage}\n`;
               return `Assistant: ${message.content}\n`;
             })}
                 
