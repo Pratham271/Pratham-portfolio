@@ -1,7 +1,7 @@
 'use client';
-import { userInputAtom } from '@/store/atoms/userInput'
+import { loadingAtom, userInputAtom } from '@/store/atoms/userInput'
 import React, { useEffect, useRef } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { SendHorizonal, Trash } from "lucide-react"
 import { Message } from '@/type';
 
@@ -17,7 +17,7 @@ interface messageProp {
 const ChatForm = ({setMessages,handleFormSubmit,open}: messageProp) => {
     const [input, setInput] = useRecoilState(userInputAtom)
     const inputRef = useRef<HTMLInputElement | null>(null);
-
+    const loading = useRecoilValue(loadingAtom)
     useEffect(()=> {
         inputRef.current?.focus()
     },[open])
@@ -34,6 +34,7 @@ const ChatForm = ({setMessages,handleFormSubmit,open}: messageProp) => {
           </button>
           <input
             value={input}
+            disabled={loading}
             ref={inputRef}
             onChange={(e)=> setInput(e.target.value)}
             placeholder="Ask something"

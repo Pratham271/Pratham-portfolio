@@ -3,16 +3,17 @@ import { cn } from '@/utils/cn'
 import React, { useEffect, useState } from 'react'
 import { Bot, XCircle } from "lucide-react";
 import ChatForm from './helper/ChatForm';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loadingAtom, userInputAtom } from '@/store/atoms/userInput';
 import { type AI } from "../actions/chat";
 import { readStreamableValue, useActions } from "ai/rsc";
 import { Message, Props } from '@/type';
+import LlmResponseComponent from './LlmResponseComponent';
 
 
 const AIChatComponent = ({open, onClose}:Props) => {
   const {myAction} = useActions<typeof AI>();
-  const [loading, setLoading] = useRecoilState(loadingAtom)
+  const setLoading = useSetRecoilState(loadingAtom)
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useRecoilState(userInputAtom)
   useEffect(()=> {
@@ -47,6 +48,14 @@ const AIChatComponent = ({open, onClose}:Props) => {
     setMessages(prevMessage =>[...prevMessage, newMessage]);
     console.log(messages)
     let lastAppendResponse = "";
+    try {
+      setLoading(true)
+      await new Promise(resolve => setTimeout(resolve,1000))
+    } catch (error) {
+      console.error("Error streaming data for user message: ",error)
+    }finally{
+      setLoading(false)
+    }
   }
 
   return (
@@ -59,9 +68,16 @@ const AIChatComponent = ({open, onClose}:Props) => {
       </button>
       <div className="flex h-[600px] flex-col rounded border bg-zinc-900 shadow-xl">
         <div className="mt-3 h-full overflow-y-auto px-3">
-          {messages && messages.length>0 && messages.map((message)=> (
-            <div key={message.id} className="mx-2 my-1 absolute right-2 px-2 bg-slate-100 text-black py-2 rounded-md">
-              {message.userMessage}
+          {messages && messages.length>0 && messages.map((message,index)=> (
+            <div key={`message-${index}`} className='mt-4'>
+              {message.type === 'user' && (
+              <div key={`userMessage-${index}`} className="mb-3 flex items-center ms-5 justify-end text-black">
+                <p className="bg-gray-100 py-2 px-3 rounded-md">{message.userMessage}</p>
+            </div>
+              )}
+            <div key={`llm-${index}`} className="mt-3">
+              <LlmResponseComponent content={message.content}/>
+            </div>
             </div>
           ))}
         { messages.length === 0 && (
