@@ -9,5 +9,5 @@ export const userInputAtom = atom({
 
 export const loadingAtom = atom({
     key: "loadingAtom",
-    default: []
+    default: false
 })
