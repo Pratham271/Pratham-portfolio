@@ -46,6 +46,7 @@ const AIChatComponent = ({open, onClose}:Props) => {
     };
     setMessages(prevMessage =>[...prevMessage, newMessage]);
     console.log(messages)
+    let lastAppendResponse = "";
   }
 
   return (
@@ -58,6 +59,11 @@ const AIChatComponent = ({open, onClose}:Props) => {
       </button>
       <div className="flex h-[600px] flex-col rounded border bg-zinc-900 shadow-xl">
         <div className="mt-3 h-full overflow-y-auto px-3">
+          {messages && messages.length>0 && messages.map((message)=> (
+            <div key={message.id} className="mx-2 my-1 absolute right-2 px-2 bg-slate-100 text-black py-2 rounded-md">
+              {message.userMessage}
+            </div>
+          ))}
         { messages.length === 0 && (
             <div className="mx-8 flex h-full flex-col items-center justify-center gap-3 text-center">
               <Bot size={32} />
@@ -71,7 +77,7 @@ const AIChatComponent = ({open, onClose}:Props) => {
             </div>
           )}
         </div>
-        <ChatForm setMessages={setMessages} handleFormSubmit={handleFormSubmit}/>
+        <ChatForm setMessages={setMessages} handleFormSubmit={handleFormSubmit} open={open}/>
       </div>
     </div>
   )
