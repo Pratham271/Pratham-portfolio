@@ -26,7 +26,7 @@ const ChatForm = ({setMessages,handleFormSubmit,open}: messageProp) => {
       <form className="m-3 flex gap-1" onSubmit={handleFormSubmit}>
       <button
             type="button"
-            className="flex w-10 flex-none items-center justify-center"
+            className="flex flex-none items-center justify-center"
             title="Clear chat"
             onClick={()=> setMessages([])}
           >
@@ -38,10 +38,10 @@ const ChatForm = ({setMessages,handleFormSubmit,open}: messageProp) => {
             ref={inputRef}
             onChange={(e)=> setInput(e.target.value)}
             placeholder="Ask something"
-            className="grow rounded border bg-background px-3 py-2 text-white focus:outline-none"
+            className="grow rounded border bg-background px-3 py-2 text-white focus:outline-none ml-1"
           />
           <button
-            className=" rounded border bg-background px-3 py-2 disabled:opacity-50"
+            className="grow rounded border bg-background px-3 py-2 disabled:opacity-50 flex justify-center"
             disabled={input.length === 0}
             type="submit"
             title="Submit message"
