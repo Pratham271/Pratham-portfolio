@@ -93,7 +93,6 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
           streamable.update({ 'llmResponseEnd': true });
           const emptyGeneration:any = [];
           const response = await cache.update(userMessage, process.env.GROQ_API_KEY!, emptyGeneration.concat({ content: fullResponse }));
-          console.log("response: ",response)
         }
       }
 
