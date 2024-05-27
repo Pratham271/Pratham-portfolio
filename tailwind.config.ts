@@ -9,9 +9,9 @@ const {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
+    './src/pages/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
 
     // Or if using `src` directory:
@@ -25,6 +25,9 @@ module.exports = {
       },
       animation: {
         spotlight: "spotlight 2s ease .75s 1 forwards",
+      },
+      colors: {
+        background: "hsl(var(--background))",
       },
       keyframes: {
         spotlight: {

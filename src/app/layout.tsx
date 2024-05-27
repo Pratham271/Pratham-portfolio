@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AI } from "@/actions/chat";
+import Providers from "./providers";
 
 
 
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-         <AI>
-          {children}
-        </AI>
+        <Providers>
+          <AI>
+            {children}
+          </AI>
+        </Providers>
       </body>
     </html>
   );
