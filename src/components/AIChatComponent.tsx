@@ -45,7 +45,6 @@ const AIChatComponent = ({open, onClose}:Props) => {
       isStreaming: true
     };
     setMessages(prevMessage =>[...prevMessage, newMessage]);
-    console.log(messages)
     let lastAppendResponse = "";
     try {
       setLoading(true)
