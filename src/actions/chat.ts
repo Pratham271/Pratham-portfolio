@@ -34,9 +34,10 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
       const cachedResponse = await cache.lookup(userMessage,process.env.GROQ_API_KEY!)
       if (cachedResponse) {
         // If cached response exists, return it immediately
-        streamable.update({ 'llmResponse': cachedResponse });
-        streamable.done({ status: 'done' });
-        return;
+        console.log(cachedResponse)
+        // streamable.update({ 'llmResponse': cachedResponse });
+        // streamable.done({ status: 'done' });
+        // return;
     }
         const vectorStore = await getVectorStore()
 
@@ -83,16 +84,16 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
     stream: true,
     model: "llama3-70b-8192",
     })
-    let fullResponse = ''
+    // let fullResponse = ''
     for await (const chunk of chatCompletion) {
         if (chunk.choices[0].delta && chunk.choices[0].finish_reason !== "stop") {
             // console.log(chunk.choices[0].delta)
           streamable.update({ 'llmResponse': chunk.choices[0].delta.content });
-          fullResponse += chunk.choices[0].delta.content;
+          // fullResponse += chunk.choices[0].delta.content;
         } else if (chunk.choices[0].finish_reason === "stop") {
           streamable.update({ 'llmResponseEnd': true });
-          const emptyGeneration:any = [];
-          const response = await cache.update(userMessage, process.env.GROQ_API_KEY!, emptyGeneration.concat({ content: fullResponse }));
+          // const emptyGeneration:any = [];
+          // const response = await cache.update(userMessage, process.env.GROQ_API_KEY!, emptyGeneration.concat({ content: fullResponse }));
         }
       }
 
