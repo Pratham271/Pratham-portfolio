@@ -144,8 +144,8 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
       
     },
     {
-      name: "Chatpdf",
-      description: "An AI chatbot that quickly scan your pdf's and deliver the answers you need, saving you valuable time and frustration.",
+      name: "ChatVerse",
+      description: "An AI chatbot that quickly scan your pdf's, youtube links and deliver the answers you need, saving you valuable time and frustration.",
       isDeployed: true,
       deployedLink: "https://enigma-chatpdf.vercel.app",
       image: chatpdf,

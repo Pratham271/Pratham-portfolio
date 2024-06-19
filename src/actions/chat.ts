@@ -84,16 +84,20 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
     stream: true,
     model: "llama3-70b-8192",
     })
-    // let fullResponse = ''
+    let fullResponse = ''
     for await (const chunk of chatCompletion) {
         if (chunk.choices[0].delta && chunk.choices[0].finish_reason !== "stop") {
-            // console.log(chunk.choices[0].delta)
+            console.log(chunk.choices[0].delta)
           streamable.update({ 'llmResponse': chunk.choices[0].delta.content });
-          // fullResponse += chunk.choices[0].delta.content;
+          fullResponse += chunk.choices[0].delta.content;
         } else if (chunk.choices[0].finish_reason === "stop") {
           streamable.update({ 'llmResponseEnd': true });
           // const emptyGeneration:any = [];
-          // const response = await cache.update(userMessage, process.env.GROQ_API_KEY!, emptyGeneration.concat({ content: fullResponse }));
+          // const answer = emptyGeneration.concat({ content: fullResponse })
+          // console.log(answer)
+          // const response = await cache.update(userMessage, process.env.GROQ_API_KEY!, answer[0].content);
+          // console.log(response)
+
         }
       }
 
