@@ -1,6 +1,4 @@
-"use client"
 import React from 'react'
-import { Spotlight } from '@/components/ui/Spotlight'
 
 import NavBar from '@/components/NavBar';
 import { technologies } from '@/constants';
