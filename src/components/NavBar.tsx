@@ -22,7 +22,7 @@ const NavBar = () => {
                 }
             </div>
 
-            <div className='lg:hidden flex flex-1 justify-start items-center w-full z-50'>
+            <div className="lg:hidden flex flex-1 justify-start items-center w-full z-50">
               <Hamburger onClick={() => setToggle(!toggle)}/>
               <div className={`${!toggle ? 'hidden' : 'flex'} p-6 bg-neutral-900  absolute top-10 left-0 lg:mx-4 my-2 w-full lg:w-96 z-50 rounded-xl`}>
                 <ul className='list-none flex justify-center items-center text-center mx-auto flex-col gap-4 w-full hover:bg-wh'>
