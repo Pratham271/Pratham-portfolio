@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Label } from "@radix-ui/react-label";
