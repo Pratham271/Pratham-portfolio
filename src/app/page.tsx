@@ -1,6 +1,6 @@
 import { BackgroundBeams } from '@/components/ui/background-beams';
 import NavBar from "@/components/NavBar";
-import { cn } from '@/utils/cn';
+
 
 export default function Home() {
   return (
