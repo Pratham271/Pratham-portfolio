@@ -1,4 +1,4 @@
-import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern, nextjs, postgres, prisma, recoil, Settle, tailwind, turborepo, typescript, WriteIt , } from "@/assets";
+import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern, nextjs, postgres, prisma, recoil, Settle, tailwind, turborepo, typescript, WriteIt, Langchain, Llamaindex, Python , } from "@/assets";
 
   
   export const navLinks = [
@@ -23,16 +23,23 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
       title: "Contact",
     },
   ];
-
   
   const technologies = [
+    // {
+    //   name: "HTML 5",
+    //   icon: html,
+    // },
+    // {
+    //   name: "CSS 3",
+    //   icon: css,
+    // },
     {
-      name: "HTML 5",
-      icon: html,
+      name: "Langchain",
+      icon:Langchain
     },
     {
-      name: "CSS 3",
-      icon: css,
+      name: "LlamaIndex",
+      icon:Llamaindex,
     },
     {
       name: "JavaScript",
@@ -43,17 +50,21 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
       icon: typescript,
     },
     {
-      name: "Recoil",
-      icon: recoil,
+      name: "Python",
+      icon: Python,
     },
-    {
-      name: "Tailwind CSS",
-      icon: tailwind,
-    },
-    {
-      name: "Mern",
-      icon: mern,
-    },
+    // {
+    //   name: "Recoil",
+    //   icon: recoil,
+    // },
+    // {
+    //   name: "Tailwind CSS",
+    //   icon: tailwind,
+    // },
+    // {
+    //   name: "Mern",
+    //   icon: mern,
+    // },
     {
       name: "Prisma",
       icon: prisma,
@@ -82,6 +93,18 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
   
   const experiences = [
     {
+      title: "Full Stack AI Developer",
+      company_name: "Leapx",
+      date: "Currently Working Here", // You'll need to fill in the actual dates
+      points: [
+        "Developed an **AI chatbot** using **Vercel AI** to launch and manage **Meta** and **Google marketing campaigns**.",
+        "Migrated the chatbot's core technology to **LangGraph** for enhanced capabilities.",
+        "Implemented the chatbot with **LlamaIndex** to provide deep insights into **Google** and **Meta campaigns**.",
+        "Created foundational **libraries** to streamline fetching and pushing campaign data, serving as the **infrastructure** for these products.",
+        "Contributed to **schema design** and **DevOps** activities to support product development and deployment."
+      ],
+    },
+    {
       title: "Web Developer",
       company_name: "ISRO",
       date: "October 2022 - April 2023",
@@ -106,16 +129,16 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
         "Utilized Spring Framework for dependency injection, facilitating a loosely coupled architecture, and Hibernate ORM(Object-Relational Mapping) for seamless interaction with the underlying database.",
       ],
     },
-    {
-      title: "Intern",
-      company_name: "VLCC",
-      date: "Jun 2022 - July 2022",
-      points: [
-        "Managed the ERP of the company.",
-        "Collaborated with several teams.",
-        "Learned about the corporate culture.",
-      ],
-    },
+    // {
+    //   title: "Intern",
+    //   company_name: "VLCC",
+    //   date: "Jun 2022 - July 2022",
+    //   points: [
+    //     "Managed the ERP of the company.",
+    //     "Collaborated with several teams.",
+    //     "Learned about the corporate culture.",
+    //   ],
+    // },
     
   ];
   

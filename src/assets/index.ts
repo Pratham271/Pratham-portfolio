@@ -16,6 +16,9 @@ import nextjs from './tech/nextjs.png'
 import postgres from './tech/postgres.png'
 import turborepo from './tech/turborepo.png'
 import chatpdf from './Chatpdf.png'
+import Langchain from "./tech/Langchain.png"
+import Llamaindex from "./tech/Llamindex.jpeg"
+import Python from "./tech/python.png"
 
 export {
     Settle, 
@@ -35,6 +38,9 @@ export {
     nextjs,
     postgres,
     turborepo,
-    chatpdf
+    chatpdf,
+    Langchain,
+    Llamaindex,
+    Python
     
 }
