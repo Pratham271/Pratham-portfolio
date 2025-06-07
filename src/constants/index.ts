@@ -97,11 +97,11 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
       company_name: "Leapx",
       date: "Currently Working Here", // You'll need to fill in the actual dates
       points: [
-        "Developed an **AI chatbot** using **Vercel AI** to launch and manage **Meta** and **Google marketing campaigns**.",
-        "Migrated the chatbot's core technology to **LangGraph** for enhanced capabilities.",
-        "Implemented the chatbot with **LlamaIndex** to provide deep insights into **Google** and **Meta campaigns**.",
-        "Created foundational **libraries** to streamline fetching and pushing campaign data, serving as the **infrastructure** for these products.",
-        "Contributed to **schema design** and **DevOps** activities to support product development and deployment."
+        "Developed an AI chatbot using Vercel AI to launch and manage Meta and Google marketing campaigns.",
+        "Migrated the chatbot's core technology to LangGraph for enhanced capabilities.",
+        "Implemented the chatbot with LlamaIndex to provide deep insights into Google and Meta campaigns.",
+        "Created foundational libraries to streamline fetching and pushing campaign data, serving as the infrastructure for these products.",
+        "Contributed to schema design and DevOps activities to support product development and deployment."
       ],
     },
     {
