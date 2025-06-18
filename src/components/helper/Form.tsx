@@ -94,7 +94,7 @@ export default function Form() {
           >
             <IconBrandX className="h-4 w-4 text-neutral-300" />
             <span className="text-neutral-300 text-sm">
-              <a href="https://twitter.com/Pratham9474" target="_blank">Twitter</a>
+              <a href="https://x.com/Pratham9474" target="_blank">X &#40;Formerly Twitter&#41;</a>
             </span>
             <BottomGradient />
           </button>
