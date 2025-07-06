@@ -27,18 +27,18 @@ async function myAction(userMessage: string, prevMessages: ChatMessageProps[]): 
     const streamable = createStreamableValue({});
 
     (async ()=> {
-      const cache = new UpstashRedisCache({
-        client: redis,
-      });
+      // const cache = new UpstashRedisCache({
+      //   client: redis,
+      // });
 
-      const cachedResponse = await cache.lookup(userMessage,process.env.GROQ_API_KEY!)
-      if (cachedResponse) {
-        // If cached response exists, return it immediately
-        console.log(cachedResponse)
-        // streamable.update({ 'llmResponse': cachedResponse });
-        // streamable.done({ status: 'done' });
-        // return;
-    }
+      // const cachedResponse = await cache.lookup(userMessage,process.env.GROQ_API_KEY!)
+    //   if (cachedResponse) {
+    //     // If cached response exists, return it immediately
+    //     console.log(cachedResponse)
+    //     // streamable.update({ 'llmResponse': cachedResponse });
+    //     // streamable.done({ status: 'done' });
+    //     // return;
+    // }
         const vectorStore = await getVectorStore()
 
         const result = await vectorStore.similaritySearch(userMessage,4)
