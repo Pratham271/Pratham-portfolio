@@ -1,6 +1,5 @@
 "use client";
 import React from 'react'
-import { HoverBorderGradient } from '../ui/hover-border-gradient'
 
 const Button = () => {
     const openPDF = () => {
@@ -9,16 +8,14 @@ const Button = () => {
       };
     
   return (
-    <div className="flex justify-center text-center pl-3">
-      <HoverBorderGradient
-        containerClassName="rounded-full"
-        as="button"
-        className=" bg-transparent  text-white flex items-center space-x-2"
+    <div className="hidden justify-center text-center sm:flex">
+      <button
+        className="rounded-full bg-[hsl(var(--foreground))] px-4 py-2 text-sm font-medium text-[hsl(var(--background))] transition hover:opacity-85"
         onClick={openPDF}
+        type="button"
       >
-        <span> Resume</span>
-        
-      </HoverBorderGradient>
+        Resume
+      </button>
     </div>
   )
 }

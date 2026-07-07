@@ -23,10 +23,10 @@ const ChatForm = ({setMessages,handleFormSubmit,open}: messageProp) => {
     },[open])
   return (
     <>
-      <form className="m-3 flex gap-1" onSubmit={handleFormSubmit}>
+      <form className="m-3 flex gap-2" onSubmit={handleFormSubmit}>
       <button
             type="button"
-            className="flex flex-none items-center justify-center"
+            className="flex h-11 w-11 flex-none items-center justify-center rounded-full border border-[hsl(var(--line))] text-[hsl(var(--muted))] hover:text-[hsl(var(--foreground))]"
             title="Clear chat"
             onClick={()=> setMessages([])}
           >
@@ -38,10 +38,10 @@ const ChatForm = ({setMessages,handleFormSubmit,open}: messageProp) => {
             ref={inputRef}
             onChange={(e)=> setInput(e.target.value)}
             placeholder="Ask something"
-            className="grow rounded border bg-background px-3 py-2 text-white focus:outline-none ml-1"
+            className="min-w-0 grow rounded-full border border-[hsl(var(--line))] bg-[hsl(var(--background))] px-4 py-2 text-[hsl(var(--foreground))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--accent))]"
           />
           <button
-            className="grow lg:grow-0 rounded border bg-background px-3 py-2 disabled:opacity-50 flex justify-center"
+            className="flex h-11 w-11 justify-center rounded-full bg-[hsl(var(--foreground))] px-3 py-2 text-[hsl(var(--background))] disabled:opacity-50"
             disabled={input.length === 0}
             type="submit"
             title="Submit message"

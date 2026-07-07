@@ -5,16 +5,13 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='bg-black'>
+    <div className='min-h-screen'>
       <NavBar/>
-      <div className="h-[130rem] lg:h-[60rem] w-full bg-black  bg-grid-white/[0.2] relative flex items-center justify-center">
-      {/* Radial gradient for the container to give a faded look */}
-      <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black  [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <p className="text-4xl sm:text-7xl font-bold absolute top-0 z-10 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 ">
-        Experience
-      </p>
-      <div className="absolute top-24 p-4">
-      <ol className="relative border-s border-gray-200 dark:border-gray-700">  
+      <main className="mx-auto max-w-5xl px-5 py-10 lg:px-10">
+      <h1 className="mb-10 text-5xl font-black leading-none text-[hsl(var(--foreground))] md:text-8xl">
+        Work, without the resume fog.
+      </h1>
+      <ol className="relative border-s border-[hsl(var(--line))]">
         {
 
           experiences.map((experience,index)=> (
@@ -25,8 +22,7 @@ const page = () => {
         }
          </ol>
 
-      </div>
-    </div>
+      </main>
     </div>
   )
 }

@@ -15,14 +15,14 @@ const LlmResponseComponent = ({content}: {content:string}) => {
        {hasLLMResponse ? (
         <div className='flex items-center'>
             
-            <span className='leading-5 border border-gray-600  px-2 py-2 rounded-md ml-1'>
+            <span className='ml-1 rounded-2xl border border-[hsl(var(--line))] px-3 py-2 leading-5 text-[hsl(var(--foreground))]'>
             <ReactMarkdown
           components={{
             a: ({ node, ref, ...props }) => (
               <Link
                 {...props}
                 href={props.href ?? ""}
-                className="text-blue-200 hover:underline"
+                className="text-[hsl(var(--accent-strong))] hover:underline"
               />
             ),
             p: ({ node, ...props }) => (

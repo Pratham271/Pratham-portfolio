@@ -77,19 +77,19 @@ const AIChatComponent = ({open, onClose}:Props) => {
 
   return (
     <div className={cn(
-        "bottom-0 right-0 z-50 w-full max-w-[500px] p-1 xl:right-0",
+        "bottom-3 right-3 z-50 w-[calc(100vw-1.5rem)] max-w-[500px]",
         open ? "fixed" : "hidden",
       )}>
-      <button onClick={onClose} className="mb-1 ms-auto block ">
-        <XCircle size={30} className="rounded-full bg-background" />
+      <button onClick={onClose} className="mb-2 ms-auto block text-[hsl(var(--foreground))]" aria-label="Close chat" type="button">
+        <XCircle size={30} className="rounded-full bg-[hsl(var(--panel-strong))]" />
       </button>
-      <div className="flex h-[600px] flex-col rounded border bg-zinc-900 shadow-xl">
-        <div className="mt-3 h-full overflow-y-auto px-3 mb-6" ref={scrollRef}>
+      <div className="flex h-[min(620px,calc(100dvh-7rem))] min-h-[360px] flex-col rounded-3xl border border-[hsl(var(--line))] bg-[hsl(var(--panel-strong))] shadow-2xl shadow-black/20">
+        <div className="mb-3 mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
           {messages && messages.length>0 && messages.map((message,index)=> (
             <div key={`message-${index}`} className='mt-4'>
               {message.type === 'user' && (
-              <div key={`userMessage-${index}`} className="mb-3 flex items-center ms-5 justify-end text-black">
-                <p className="bg-gray-100 py-2 px-3 rounded-md">{message.userMessage}</p>
+              <div key={`userMessage-${index}`} className="mb-3 ms-5 flex items-center justify-end">
+                <p className="rounded-2xl bg-[hsl(var(--accent-soft))] px-3 py-2 text-[hsl(var(--foreground))]">{message.userMessage}</p>
             </div>
               )}
             <div key={`llm-${index}`} className="mt-3">
@@ -100,10 +100,10 @@ const AIChatComponent = ({open, onClose}:Props) => {
         { messages.length === 0 && (
             <div className="mx-8 flex h-full flex-col items-center justify-center gap-3 text-center">
               <Bot size={32} />
-              <p className="text-lg font-medium">
+              <p className="text-lg font-medium text-[hsl(var(--foreground))]">
                 Send a message to start the AI chat!
               </p>
-              <p>
+              <p className="text-[hsl(var(--muted))]">
                 You can ask the chatbot any question about me and it will find
                 the relevant information.
               </p>

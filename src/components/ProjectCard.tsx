@@ -9,45 +9,55 @@ interface CardProps{
   img:string,
   codeLink:string,
   deployedLink: string,
-  isDeployed: boolean
+  isDeployed: boolean,
+  index: number
 }
 
-const ProjectCard = ({title,description,img,codeLink,deployedLink,isDeployed}:CardProps) => {
+const ProjectCard = ({title,description,img,codeLink,deployedLink,isDeployed,index}:CardProps) => {
+  const flip = index % 2 === 1;
   
 
   return (
-    <div className='mt-8 border border-neutral-500 md:ml-10 p-6 rounded-md bg-zinc-300 '>
-        <Image
-          src={img}
-          alt=""
-          height="250"
-          width="600"
-          className="object-contain"
-        />
-        <p className="text-base sm:text-xl  mt-4 mb-2 text-neutral-900">
-          {title}
-        </p>
- 
-        <p className="text-sm text-neutral-800">
-          {description}
-        </p>
-        <div className='flex'>
-        <button className="rounded-full pl-4 pr-1 py-1 text-white flex items-center space-x-1  mt-4 text-xs font-bold bg-zinc-800 z-20">
-          <a href={codeLink} target='_blank'>Github Link</a>
-          <span className=" rounded-full text-[0.6rem] px-2 py-0 text-white">
-          <FaArrowUpRightFromSquare />
-          </span>
-        </button>
-        <button 
-        disabled={isDeployed} 
-        className={`rounded-full ml-4 pl-4 pr-1 py-1 ${isDeployed?"opacity-100":"opacity-50"} text-white flex items-center space-x-1  mt-4 text-xs font-bold bg-zinc-800 z-20`}>
-          {isDeployed?<a href={deployedLink} target='_blank'><span>Live Link</span></a>:<span>Live Link</span>}
-          <span className=" rounded-full text-[0.6rem]  px-2 py-0 text-white">
-          <FaArrowUpRightFromSquare />
-          </span>
-        </button>
+    <article className="group border-t border-[hsl(var(--line))] py-10 last:border-b">
+      <div className={`grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
+        <div className="overflow-hidden rounded-[1.75rem] border border-[hsl(var(--line))] bg-[hsl(var(--panel-strong))] p-2 shadow-sm">
+          <div className="flex h-8 items-center gap-2 rounded-t-[1.25rem] border-b border-[hsl(var(--line))] bg-[hsl(var(--background))] px-3">
+            <span className="h-2 w-2 rounded-full bg-[hsl(var(--muted)/0.35)]" />
+            <span className="h-2 w-2 rounded-full bg-[hsl(var(--muted)/0.25)]" />
+            <span className="h-2 w-2 rounded-full bg-[hsl(var(--muted)/0.18)]" />
+          </div>
+          <Image
+            src={img}
+            alt={title}
+            height="520"
+            width="900"
+            className="aspect-[16/10] w-full rounded-b-[1.25rem] object-cover object-top transition duration-500 group-hover:scale-[1.015]"
+          />
         </div>
-    </div>
+        <div className="max-w-xl">
+          <div className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[hsl(var(--muted))]">
+            <span>0{index + 1}</span>
+            <span className="h-px w-10 bg-[hsl(var(--line))]" />
+            <span>{isDeployed ? "Live product" : "Code archive"}</span>
+          </div>
+          <h2 className="text-4xl font-black leading-none text-[hsl(var(--foreground))] md:text-6xl">
+          {title}
+          </h2>
+ 
+          <p className="mt-6 text-base leading-8 text-[hsl(var(--muted))]">
+          {description}
+          </p>
+          <div className='mt-8 flex flex-wrap gap-3'>
+          <a className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--line))] px-5 py-3 text-sm font-bold text-[hsl(var(--foreground))] transition hover:border-[hsl(var(--foreground))]" href={codeLink} target='_blank'>Github <FaArrowUpRightFromSquare /></a>
+          {isDeployed ? (
+            <a className="inline-flex items-center gap-2 rounded-full bg-[hsl(var(--foreground))] px-5 py-3 text-sm font-bold text-[hsl(var(--background))] transition hover:opacity-85" href={deployedLink} target='_blank'>Live <FaArrowUpRightFromSquare /></a>
+          ) : (
+            <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--line))] px-5 py-3 text-sm font-bold text-[hsl(var(--muted))] opacity-60">Live <FaArrowUpRightFromSquare /></span>
+          )}
+          </div>
+        </div>
+      </div>
+    </article>
   )
 }
 

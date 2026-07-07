@@ -3,27 +3,41 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background: 42 38% 95%;
+  --foreground: 210 11% 10%;
+  --muted: 210 9% 42%;
+  --panel: 44 44% 98%;
+  --panel-strong: 0 0% 100%;
+  --line: 210 12% 82%;
+  --accent: 164 68% 38%;
+  --accent-strong: 164 73% 28%;
+  --accent-soft: 164 55% 88%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.dark {
+  --background: 220 19% 7%;
+  --foreground: 45 25% 92%;
+  --muted: 218 9% 66%;
+  --panel: 220 17% 10%;
+  --panel-strong: 220 16% 13%;
+  --line: 220 14% 22%;
+  --accent: 172 66% 48%;
+  --accent-strong: 172 76% 58%;
+  --accent-soft: 172 42% 15%;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: hsl(var(--foreground));
+  background:
+    linear-gradient(90deg, hsl(var(--line) / 0.16) 1px, transparent 1px),
+    linear-gradient(hsl(var(--line) / 0.16) 1px, transparent 1px),
+    hsl(var(--background));
+  background-size: 44px 44px;
+}
+
+::selection {
+  background: hsl(var(--accent-soft));
+  color: hsl(var(--foreground));
 }
 
 @layer utilities {

@@ -1,37 +1,18 @@
 import React from 'react'
-import { SparklesCore } from './ui/sparkles'
 import Form from './helper/Form'
 
 const ContactComponent = async() => {
   return (
-    <div className="h-screen mt-6 lg:mt-0 w-full overflow-x-hidden bg-black flex flex-col items-center justify-center  rounded-md">
-      <h1 className="text-3xl md:text-5xl font-bold text-center text-white relative ">
-        Let&apos;s Connect
-      </h1>
-      <div className="w-[40rem] h-40 relative">
-        {/* Gradients */}
-        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
-        <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
-        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
-        <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
- 
-        {/* Core component */}
-        <SparklesCore
-          background="transparent"
-          minSize={0.4}
-          maxSize={1}
-          particleDensity={1200}
-          className="w-full h-full"
-          particleColor="#FFFFFF"
-        />
- 
-        {/* Radial Gradient to prevent sharp edges */}
-        <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
-      </div>
-      <div>
+    <main className="mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl items-center gap-10 px-5 py-10 lg:grid-cols-[0.85fr_1.15fr] lg:px-10">
+      <section>
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent-strong))]">Contact</p>
+        <h1 className="text-5xl font-black leading-none text-[hsl(var(--foreground))] md:text-8xl">Let&apos;s build something sharp.</h1>
+        <p className="mt-6 max-w-md text-lg leading-8 text-[hsl(var(--muted))]">Send a message, browse socials, or use the chat button if you want the AI version first.</p>
+      </section>
+      <div className="w-full">
       <Form/>
       </div>
-    </div>
+    </main>
   )
 }
 

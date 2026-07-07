@@ -1,28 +1,35 @@
-import { BackgroundBeams } from '@/components/ui/background-beams';
 import NavBar from "@/components/NavBar";
+import Image from "next/image";
 
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-neutral-950">
+    <div className="min-h-screen">
       <NavBar/>
-      <div className='lg:mt-32'>
-        <div className="h-[70rem] lg:h-[40rem] w-full rounded-md  relative flex flex-col items-center justify-center antialiased">
-      <div className="max-w-3xl mx-auto pb-40 lg:pb-4 px-4">
-        <h1 className="relative z-10 text-3xl md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
-          About Me
-        </h1>
-        <p className='mx-auto my-6 text-center text-sm md:text-lg text-white'>Computer Science Graduate & Web Developer</p>
-        <div className='mt-12 text-center mx-auto flex justify-center bg-gradient-to-b from-teal-500 rounded-full h-72 w-72 md:w-96 md:h-96 overflow-hidden'>
-        <img src="avatar.png" alt="" className='flex flex-col w-full h-full object-cover'/>
+      <main className="mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl items-center gap-12 px-5 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:px-10">
+        <section>
+          <p className="mb-5 inline-flex rounded-full border border-[hsl(var(--line))] bg-[hsl(var(--panel)/0.78)] px-4 py-2 text-sm text-[hsl(var(--muted))]">AI developer · open source contributor</p>
+          <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-normal text-[hsl(var(--foreground))] md:text-8xl">
+            Pratham builds useful AI products.
+          </h1>
+          <p className="mt-8 max-w-2xl text-lg leading-8 text-[hsl(var(--muted))]">
+            Computer Science graduate and full-stack web developer focused on AI interfaces, agentic systems, and clean product experiences. Currently building campaign intelligence tools and contributing to open source.
+          </p>
+          <div className="mt-10 grid gap-3 text-sm text-[hsl(var(--muted))] sm:grid-cols-3">
+            <div className="border-t border-[hsl(var(--line))] pt-3"><span className="block text-2xl font-bold text-[hsl(var(--foreground))]">AI</span> LangGraph, LlamaIndex, Vercel AI</div>
+            <div className="border-t border-[hsl(var(--line))] pt-3"><span className="block text-2xl font-bold text-[hsl(var(--foreground))]">Web</span> Next.js, TypeScript, Postgres</div>
+            <div className="border-t border-[hsl(var(--line))] pt-3"><span className="block text-2xl font-bold text-[hsl(var(--foreground))]">Now</span> Full Stack AI Developer</div>
+          </div>
+        </section>
+        <div className='mx-auto flex w-full max-w-md flex-col items-center'>
+          <div className="aspect-square w-full max-w-[390px] overflow-hidden rounded-full border border-[hsl(var(--line))] bg-[hsl(var(--panel-strong))] p-3 shadow-2xl shadow-black/10">
+            <Image src="/avatar.png" alt="Pratham Chauhan" width={720} height={720} priority className='h-full w-full rounded-full object-cover object-top'/>
+          </div>
+          <div className="mt-5 w-full rounded-3xl border border-[hsl(var(--line))] bg-[hsl(var(--panel)/0.82)] p-5 text-sm leading-6 text-[hsl(var(--muted))] backdrop-blur">
+            Ask the chat button about projects, work history, or what Pratham is building next.
+          </div>
         </div>
-        <p className="text-neutral-500 mt-8 text-lg max-w-3xl mx-auto my-8  text-center relative z-10">
-          Greetings! I&apos;m Pratham Chauhan, a recent B-Tech graduate from The NorthCap University in Computer Science, specializing in crafting captivating and user-centric digital experiences. My journey in web development is driven by a fervent passion for innovation and a dedication to excellence. I bring to the table a comprehensive skill set encompassing both front-end and back-end development, empowering me to transform concepts into seamless and dynamic web solutions. Currently interested in AI and an active contributor in Open Source
-        </p>
-      </div>
-      <BackgroundBeams />
-    </div>
-    </div>  
+      </main>
     </div>
   );
 }

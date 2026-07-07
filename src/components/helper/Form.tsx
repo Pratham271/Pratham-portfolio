@@ -46,10 +46,10 @@ export default function Form() {
   };
   
   return (
-    <div className={`w-96 md:w-[600px] mx-auto rounded-none md:rounded-2xl p-4 md:px-8 shadow-input bg-black`}>
+    <div className={`mx-auto w-full rounded-3xl border border-[hsl(var(--line))] bg-[hsl(var(--panel-strong))] p-4 shadow-xl shadow-black/10 md:p-8`}>
         {showAlert?<Alert name={name} setShowAlert={setShowAlert}/>:null}
       <div className={`${showAlert?"opacity-50":"opacity-100"}`}>
-      <h2 className="font-bold text-2xl text-neutral-200 text-center">
+      <h2 className="text-center text-2xl font-bold text-[hsl(var(--foreground))]">
         Get In Touch
       </h2>
       
@@ -68,42 +68,42 @@ export default function Form() {
         </LabelInputContainer>
         <button
           disabled={name.length===0 || email.length===0 || body.length===0}
-          className="bg-gradient-to-br relative group/btn  from-zinc-900 to-zinc-900  block bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          className="group/btn relative block h-11 w-full rounded-full bg-[hsl(var(--foreground))] font-medium text-[hsl(var(--background))] disabled:cursor-not-allowed disabled:opacity-45"
           type="submit"
         >
          Send 
           <BottomGradient />
         </button>
 
-        <div className="bg-gradient-to-r from-transparent via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+        <div className="my-8 h-px w-full bg-[hsl(var(--line))]" />
 
         <div className="flex flex-col space-y-4">
           <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium  bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            className="group/btn relative flex h-11 w-full items-center justify-start gap-2 rounded-full border border-[hsl(var(--line))] px-4 font-medium text-[hsl(var(--foreground))] transition hover:border-[hsl(var(--accent))]"
             type="button"
           >
-            <IconBrandGithub className="h-4 w-4 text-neutral-300" />
-            <span className="text-neutral-300 text-sm">
+            <IconBrandGithub className="h-4 w-4" />
+            <span className="text-sm">
               <a href="https://github.com/Pratham271" target="_blank">GitHub</a>
             </span>
             <BottomGradient />
           </button>
           <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium  bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            className="group/btn relative flex h-11 w-full items-center justify-start gap-2 rounded-full border border-[hsl(var(--line))] px-4 font-medium text-[hsl(var(--foreground))] transition hover:border-[hsl(var(--accent))]"
             type="button"
           >
-            <IconBrandX className="h-4 w-4 text-neutral-300" />
-            <span className="text-neutral-300 text-sm">
+            <IconBrandX className="h-4 w-4" />
+            <span className="text-sm">
               <a href="https://x.com/Pratham9474" target="_blank">X &#40;Formerly Twitter&#41;</a>
             </span>
             <BottomGradient />
           </button>
           <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium  bg-zinc-900 shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            className="group/btn relative flex h-11 w-full items-center justify-start gap-2 rounded-full border border-[hsl(var(--line))] px-4 font-medium text-[hsl(var(--foreground))] transition hover:border-[hsl(var(--accent))]"
             type="button"
           >
-            <IconBrandLinkedin className="h-4 w-4 text-neutral-300" />
-            <span className="text-neutral-300 text-sm">
+            <IconBrandLinkedin className="h-4 w-4" />
+            <span className="text-sm">
               <a href="https://www.linkedin.com/in/pratham-chauhan-0812ba1a0/" target="_blank">LinkedIn</a>
             </span>
             <BottomGradient />
@@ -118,8 +118,7 @@ export default function Form() {
 const BottomGradient = () => {
   return (
     <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+      <span className="absolute inset-x-6 -bottom-px block h-px bg-[hsl(var(--accent))] opacity-0 transition duration-300 group-hover/btn:opacity-100" />
     </>
   );
 };

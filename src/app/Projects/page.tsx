@@ -1,48 +1,33 @@
 import NavBar from '@/components/NavBar'
 import ProjectCard from '@/components/ProjectCard'
-import { SparklesCore } from '@/components/ui/sparkles'
 import { projects } from '@/constants'
 import React from 'react'
 
 const Projects = () => {
   return (
-  <div className='bg-black'>
+  <div className='min-h-screen'>
       <NavBar/>
-      <div className="min-h-screen relative w-full bg-black mt-0 overflow-scroll rounded-md">
-      
-      <div className="w-full absolute inset-0 min-h-screen">
-        <SparklesCore
-          id="tsparticlesfullpage"
-          background="transparent"
-          minSize={0.6}
-          maxSize={1.4}
-          particleDensity={100}
-          className="w-full h-full"
-          particleColor="#FFFFFF"
-        />
-      </div>
-      
-      <h1 className="md:text-7xl mt-4 text-3xl lg:text-6xl font-bold text-center text-white  z-20">
-        Projects
-      </h1>
-      <div className=' z-20'>
-            <div className='w-full flex justify-center'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-10 mb-10'>
-                       
-                            {projects.map((project,index)=> (
-                                <ProjectCard key={index} 
-                                deployedLink = {project.deployedLink}
-                                isDeployed = {project.isDeployed}
-                                title={project.name} 
-                                description={project.description} 
-                                img={project.image.src} 
-                                codeLink={project.github_link}/>
-                            ))}
-                       
-                </div>
-            </div>
+      <main className="mx-auto max-w-7xl px-5 py-10 lg:px-10">
+        <div className="mb-8 grid gap-6 pb-8 lg:grid-cols-[1fr_340px] lg:items-end">
+          <div>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent-strong))]">Selected builds</p>
+            <h1 className="max-w-4xl text-5xl font-black leading-none text-[hsl(var(--foreground))] md:text-8xl">Useful software, not museum pieces.</h1>
+          </div>
+          <p className="text-base leading-7 text-[hsl(var(--muted))]">A compact archive of AI, writing, payments, and utility projects with working links where they exist.</p>
         </div>
-    </div>
+        <div>
+          {projects.map((project,index)=> (
+            <ProjectCard key={index}
+              index={index}
+              deployedLink = {project.deployedLink}
+              isDeployed = {project.isDeployed}
+              title={project.name}
+              description={project.description}
+              img={project.image.src}
+              codeLink={project.github_link}/>
+          ))}
+        </div>
+      </main>
   </div>
   )
 }
