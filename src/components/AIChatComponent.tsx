@@ -70,6 +70,15 @@ const AIChatComponent = ({open, onClose}:Props) => {
       }
     } catch (error) {
       console.error("Error streaming data for user message: ",error)
+      setMessages((prevMessages) => prevMessages.map((message) => (
+        message.id === newMessageId
+          ? {
+              ...message,
+              content: "I couldn't get a response right now. Please try again in a moment.",
+              isStreaming: false,
+            }
+          : message
+      )))
     }finally{
       setLoading(false)
     }
@@ -93,7 +102,7 @@ const AIChatComponent = ({open, onClose}:Props) => {
             </div>
               )}
             <div key={`llm-${index}`} className="mt-3">
-              <LlmResponseComponent content={message.content}/>
+              <LlmResponseComponent content={message.content} isStreaming={message.isStreaming}/>
             </div>
             </div>
           ))}

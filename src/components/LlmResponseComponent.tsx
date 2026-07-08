@@ -1,21 +1,30 @@
 'use client';
+import Image from 'next/image';
 import React from 'react'
-import Spinner from './ui/Spinner'
-import { useRecoilValue } from 'recoil';
-import { loadingAtom } from '@/store/atoms/userInput';
-import { Bot } from 'lucide-react';
 import ReactMarkdown from "react-markdown";
 import Link from 'next/link';
 
-const LlmResponseComponent = ({content}: {content:string}) => {
+const ThinkingBubble = () => (
+  <div className="flex items-center gap-3" aria-label="AI is thinking">
+    <span className="text-sm font-semibold text-[hsl(var(--muted))]">Thinking</span>
+    <span className="flex items-center gap-1">
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[hsl(var(--accent-strong))]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[hsl(var(--accent-strong))] [animation-delay:120ms]" />
+      <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[hsl(var(--accent-strong))] [animation-delay:240ms]" />
+    </span>
+  </div>
+)
+
+const LlmResponseComponent = ({content, isStreaming}: {content:string, isStreaming:boolean}) => {
     const hasLLMResponse = content && content.trim().length > 0 
-    const loading = useRecoilValue(loadingAtom)
   return (
     <>
        {hasLLMResponse ? (
-        <div className='flex items-center'>
-            
-            <span className='ml-1 rounded-2xl border border-[hsl(var(--line))] px-3 py-2 leading-5 text-[hsl(var(--foreground))]'>
+        <div className='flex items-start gap-2'>
+          <span className="mt-1 flex h-8 w-8 flex-none items-end justify-center overflow-hidden rounded-full border border-[hsl(var(--line))] bg-[hsl(var(--accent-soft))]">
+            <Image src="/avatar.png" alt="" width={56} height={56} className="h-10 w-10 object-contain object-bottom" />
+          </span>
+            <span className='rounded-2xl border border-[hsl(var(--line))] bg-[hsl(var(--panel))] px-3 py-2 leading-5 text-[hsl(var(--foreground))]'>
             <ReactMarkdown
           components={{
             a: ({ node, ref, ...props }) => (
@@ -39,9 +48,19 @@ const LlmResponseComponent = ({content}: {content:string}) => {
         >
           {content}
         </ReactMarkdown>
+        {isStreaming && <span className="mt-3 block"><ThinkingBubble /></span>}
         </span>
         </div>
-      ): <p className='bg-transparent mx-3 mb-6'>{loading && <Spinner/>}</p>}
+      ): isStreaming ? (
+        <div className="mx-1 mb-6 flex items-start gap-2" aria-live="polite">
+          <span className="flex h-8 w-8 flex-none items-end justify-center overflow-hidden rounded-full border border-[hsl(var(--line))] bg-[hsl(var(--accent-soft))]">
+            <Image src="/avatar.png" alt="" width={56} height={56} className="h-10 w-10 object-contain object-bottom" />
+          </span>
+          <div className="rounded-2xl border border-[hsl(var(--line))] bg-[hsl(var(--panel))] px-4 py-3">
+            <ThinkingBubble />
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }

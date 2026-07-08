@@ -11,9 +11,9 @@ const Projects = () => {
         <div className="mb-8 grid gap-6 pb-8 lg:grid-cols-[1fr_340px] lg:items-end">
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent-strong))]">Selected builds</p>
-            <h1 className="max-w-4xl text-5xl font-black leading-none text-[hsl(var(--foreground))] md:text-8xl">Useful software, not museum pieces.</h1>
+            <h1 className="max-w-4xl text-5xl font-black leading-none text-[hsl(var(--foreground))] md:text-8xl">Projects with product shape.</h1>
           </div>
-          <p className="text-base leading-7 text-[hsl(var(--muted))]">A compact archive of AI, writing, payments, and utility projects with working links where they exist.</p>
+          <p className="text-base leading-7 text-[hsl(var(--muted))]">A tighter read on what each product does, what I shipped, and the stack behind it.</p>
         </div>
         <div>
           {projects.map((project,index)=> (
@@ -23,6 +23,8 @@ const Projects = () => {
               isDeployed = {project.isDeployed}
               title={project.name}
               description={project.description}
+              impact={project.impact}
+              stack={project.stack}
               img={project.image.src}
               codeLink={project.github_link}/>
           ))}

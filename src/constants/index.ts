@@ -148,27 +148,30 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
       name: "EnigmaAI",
       description:
-        "An AI based chatbot built using langchainJs, GroqAI, Vercel ai/sdk and many more that can help you solve your problems, find relevant image and videos and even generate followup questions.",
-        isDeployed: false,
-        deployedLink: "",
-
+        "A multi-tool AI assistant for answering questions, searching media, and generating useful follow-up prompts.",
+      impact: "Built the agent flow, model integration, and tool responses around LangChain.js and the Vercel AI SDK.",
+      stack: ["LangChain.js", "Groq", "Vercel AI SDK", "Next.js"],
+      isDeployed: false,
+      deployedLink: "",
       image: AIModel,
       github_link: "https://github.com/Pratham271/100xengineer/tree/initial-setup",
     },
     {
       name: "Settle",
       description:
-        "Web-based platform that allows users to pay their friends and family in a secure fashion. With Settle, settle all your payments.",
+        "A payments-style web app for sending money to friends and family with a focused, secure transaction flow.",
+      impact: "Designed the core user flow for account actions, payment intent, and transaction confirmation.",
+      stack: ["Next.js", "TypeScript", "Prisma", "Postgres"],
       isDeployed: false,
       deployedLink: "",
-
       image: Settle,
       github_link: "https://github.com/Pratham271/Settle",
-      
     },
     {
       name: "Chatvers",
-      description: "An AI chatbot that quickly scan your documents, youtube links and even website links to deliver the answers you need, saving you valuable time and frustration.",
+      description: "An AI knowledge assistant that scans documents, YouTube links, and web pages to answer from the source material.",
+      impact: "Turned mixed content inputs into a single retrieval workflow so users can ask questions instead of manually searching.",
+      stack: ["LlamaIndex", "LangChain", "Next.js", "Vector Search"],
       isDeployed: true,
       deployedLink: "https://chatvers.com",
       image: chatpdf,
@@ -177,23 +180,25 @@ import { AIModel, css, chatpdf, docker, git, html, javascript, LinkShrink, mern,
     {
       name: "Write.it",
       description:
-        "Web application that enables users to publish their thoughts and learnings as blogs and search other people blogs too.You can ask the inhouse AI to write a blog for you and it will get you title, content and even and image for you.",
-        isDeployed: true,
-        deployedLink: "https://write-with-ai.vercel.app/",
-
+        "A blogging app where people can publish posts, search other writing, and draft with an in-house AI assistant.",
+      impact: "Shipped AI-assisted title, content, and image generation inside the authoring workflow.",
+      stack: ["Next.js", "AI SDK", "Tailwind CSS", "Postgres"],
+      isDeployed: true,
+      deployedLink: "https://write-with-ai.vercel.app/",
       image: WriteIt,
       github_link: "https://github.com/Pratham271/write.it",
     },
     {
-        name: "Link Shrink",
-        description:
-          "Don't copy paste the large url just shrink it using Link-Shrink an in house link shortener built without using any external library.",
-        isDeployed: true,
-        deployedLink: "https://link-shrink-5el0.vercel.app/",
-        image: LinkShrink,
-        github_link: "https://github.com/Pratham271/Url-shortener-frontend",
-        
-      },
+      name: "Link Shrink",
+      description:
+        "A lightweight URL shortener for turning long links into clean, shareable redirects.",
+      impact: "Kept the product intentionally small: custom short codes, redirect handling, and no external shortener service.",
+      stack: ["React", "Node.js", "URL Routing", "Custom Slugs"],
+      isDeployed: true,
+      deployedLink: "https://link-shrink-5el0.vercel.app/",
+      image: LinkShrink,
+      github_link: "https://github.com/Pratham271/Url-shortener-frontend",
+    },
   ];
   
   export {  experiences, projects, technologies };

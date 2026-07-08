@@ -37,12 +37,12 @@ const ChatForm = ({setMessages,handleFormSubmit,open}: messageProp) => {
             disabled={loading}
             ref={inputRef}
             onChange={(e)=> setInput(e.target.value)}
-            placeholder="Ask something"
+            placeholder={loading ? "Waiting for AI..." : "Ask something"}
             className="min-w-0 grow rounded-full border border-[hsl(var(--line))] bg-[hsl(var(--background))] px-4 py-2 text-[hsl(var(--foreground))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--accent))]"
           />
           <button
             className="flex h-11 w-11 justify-center rounded-full bg-[hsl(var(--foreground))] px-3 py-2 text-[hsl(var(--background))] disabled:opacity-50"
-            disabled={input.length === 0}
+            disabled={loading || input.trim().length === 0}
             type="submit"
             title="Submit message"
           >
