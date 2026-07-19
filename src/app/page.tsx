@@ -116,7 +116,8 @@ export default function Home() {
       <header className={`siteHeader shell ${navFormed ? "formed" : ""}`}>
         <a className="brand" href="#top">PC<span>.</span></a>
         <nav><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#writing">Writing</a><a href="#about">About</a></nav>
-        <div><button className="themeButton" onClick={() => setDark(value => !value)} aria-label="Toggle theme">{dark ? <Sun size={17} /> : <Moon size={17} />}</button><button onClick={() => setTerminalOpen(true)} aria-label="Open terminal"><Terminal size={17} /></button></div>
+        <div><button className="themeButton" onClick={() => setDark(value => !value)} aria-label="Toggle theme">{dark ? <Sun size={17} /> :
+          <Moon size={17} />}</button><button onClick={() => setTerminalOpen(true)} aria-label="Open terminal"><Terminal size={17} /></button></div>
       </header>
 
       <section className="manifesto shell sectionPad">
