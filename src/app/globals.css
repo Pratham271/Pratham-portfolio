@@ -28,6 +28,20 @@ html { scroll-behavior: smooth; }
 body { margin: 0; overflow-x: hidden; background: var(--bg); color: var(--text); font-family: Inter, sans-serif; transition: background .5s, color .5s; }
 button, a { cursor: pointer; }
 
+@media (max-width: 639px) { #top { --hero-scale: 1; } }
+
+@supports (animation-timeline: view()) {
+  .world-reveal {
+    clip-path: circle(0 at 50% 50%);
+    animation: reveal-world linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  @keyframes reveal-world { to { clip-path: circle(75vmax at 50% 50%); } }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .world-reveal { clip-path: none !important; animation: none !important; }
 }

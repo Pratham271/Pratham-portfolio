@@ -30,11 +30,11 @@ export const HERO_PERSONAS = [
 
 export const HERO_ROLE_CLASSES = {
   center:
-    "left-1/2 bottom-0 z-20 h-[92%] opacity-100 -translate-x-1/2 scale-[1.68] max-sm:bottom-[22%] max-sm:h-[60%] max-sm:scale-125",
-  left: "left-[30%] bottom-[12%] z-10 h-[28%] opacity-85 -translate-x-1/2 blur-[2px] max-sm:left-[20%] max-sm:bottom-[32%] max-sm:h-[16%]",
+    "left-1/2 bottom-0 z-20 h-[92%] opacity-100 max-sm:bottom-[22%] max-sm:h-[60%]",
+  left: "left-[30%] bottom-[12%] z-10 h-[28%] opacity-85 blur-[2px] max-sm:left-[20%] max-sm:bottom-[32%] max-sm:h-[16%]",
   right:
-    "left-[70%] bottom-[12%] z-10 h-[28%] opacity-85 -translate-x-1/2 blur-[2px] max-sm:left-[80%] max-sm:bottom-[32%] max-sm:h-[16%]",
-  back: "left-1/2 bottom-[12%] z-5 h-[22%] -translate-x-1/2 blur-[4px] max-sm:bottom-[32%] max-sm:h-[13%]",
+    "left-[70%] bottom-[12%] z-10 h-[28%] opacity-85 blur-[2px] max-sm:left-[80%] max-sm:bottom-[32%] max-sm:h-[16%]",
+  back: "left-1/2 bottom-[12%] z-5 h-[22%] blur-[4px] max-sm:bottom-[32%] max-sm:h-[13%]",
 } as const;
 
 export const TRACE_ENTRIES = [

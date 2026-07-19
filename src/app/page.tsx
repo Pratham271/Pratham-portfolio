@@ -11,19 +11,21 @@ export default function Home() {
 
   return (
     <main>
-      <Hero />
-      <SiteChrome openTerminal={() => setTerminalOpen(true)} />
+      <div className="relative">
+        <Hero />
+        <SiteChrome openTerminal={() => setTerminalOpen(true)} />
 
-      <section className="mx-auto grid w-[min(1180px,calc(100%_-_40px))] grid-cols-[220px_1fr] gap-10 py-[120px] max-md:grid-cols-1
-        max-sm:w-[calc(100%_-_24px)] max-sm:py-[84px]">
-        <p className="font-[DM_Mono] text-[11px] tracking-[.14em] text-[var(--muted)]">01 / WHAT I DO</p>
-        <p className="m-0 text-[clamp(38px,5vw,76px)] leading-[1.06] tracking-[-.04em]">I build at the layer where
-          <mark className="bg-transparent bg-[linear-gradient(transparent_65%,color-mix(in_srgb,var(--yellow)_48%,transparent)_65%)] text-inherit">
-            AI meets real infrastructure.
-          </mark>
-          Agents, developer tools, and full stack products shaped around useful human problems.
-        </p>
-      </section>
+        <section className="world-reveal relative z-40 grid min-h-svh w-full grid-cols-[220px_1fr] content-center gap-10 bg-[var(--bg)] px-[max(20px,calc((100vw_-_1180px)/2))] py-[120px]
+          max-md:grid-cols-1 max-sm:px-3 max-sm:py-[84px]">
+          <p className="font-[DM_Mono] text-[11px] tracking-[.14em] text-[var(--muted)]">01 / WHAT I DO</p>
+          <p className="m-0 text-[clamp(38px,5vw,76px)] leading-[1.06] tracking-[-.04em]">I build at the layer where
+            <mark className="bg-transparent bg-[linear-gradient(transparent_65%,color-mix(in_srgb,var(--yellow)_48%,transparent)_65%)] text-inherit">
+              AI meets real infrastructure.
+            </mark>
+            Agents, developer tools, and full stack products shaped around useful human problems.
+          </p>
+        </section>
+      </div>
 
       <section className="pt-[70px] pb-[120px] max-sm:pb-[84px]" id="experience">
         <div className="mx-auto mb-[60px] grid w-[min(1180px,calc(100%_-_40px))] grid-cols-[220px_1fr] gap-10 max-md:grid-cols-1 max-sm:w-[calc(100%_-_24px)]">

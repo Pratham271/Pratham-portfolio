@@ -32,8 +32,7 @@ export default function Hero() {
   const persona = HERO_PERSONAS[activeIndex];
 
   return (
-    <section className="relative h-svh w-full overflow-hidden text-white transition-colors duration-[650ms] after:pointer-events-none after:absolute
-    after:inset-x-0 after:bottom-0 after:z-30 after:h-10 after:bg-gradient-to-b after:from-transparent after:to-[var(--bg)]"
+    <section className="sticky top-0 h-screen w-full overflow-hidden text-white transition-colors duration-[650ms]"
       style={{ backgroundColor: HERO_IMAGES[activeIndex].bg }} id="top">
       <div className="pointer-events-none absolute inset-0 z-50 opacity-40" />
       <div className="pointer-events-none absolute inset-x-0 top-[18%] z-[2] flex justify-center whitespace-nowrap font-[Anton] text-[clamp(90px,28vw,380px)]
@@ -44,6 +43,10 @@ export default function Hero() {
         {HERO_IMAGES.map((image, index) => {
           const role = roleFor(index);
           return <div className={`absolute aspect-[.6/1] transition-all duration-[650ms] ease-in-out ${HERO_ROLE_CLASSES[role]}`} key={image.src}
+            style={{
+              transform: `translateX(-50%) scale(${role === "center" ? "var(--hero-scale, 1.3)" : 1})`,
+              transformOrigin: role === "center" ? "bottom center" : "center",
+            }}
             aria-hidden={role !== "center"}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className={`h-full w-full object-contain object-bottom ${index === 1 ? "origin-bottom scale-[.88]" : ""}`}
