@@ -1,124 +1,17 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Moon, Sun, Terminal } from "lucide-react";
-
-const IMAGES = [
-  { src: "/characters/orange.png", bg: "#D9856D" },
-  { src: "/characters/green.png", bg: "#8FA183" },
-  { src: "/characters/pink.png", bg: "#B7A5C8" },
-  { src: "/characters/blue.png", bg: "#8CA6B7" },
-] as const;
-
-const PERSONAS = [
-  { label: "BUILDER MODE", ghost: "BUILD", copy: "I turn ambitious ideas into focused products, reliable systems, and software people can actually use." },
-  { label: "AGENT MODE", ghost: "AGENTS", copy: "I build AI agents, MCP servers, infrastructure, and integrations that keep working beyond the demo." },
-  { label: "PRODUCT MODE", ghost: "CRAFT", copy: "I make complex technology feel direct, useful, and unusually polished." },
-  { label: "SHIP MODE", ghost: "SCALE", copy: "I work from first prototype to production, connecting product thinking with full stack engineering." },
-] as const;
-
-const RESPONSES: Record<string, string> = {
-  help: "Available commands:\n\n  work        explore selected projects\n  about       learn about Pratham\n  stack       inspect technologies\n  experience  view professional history\n  writing     browse recent articles\n  contact     start a conversation\n  clear       clear the terminal",
-  work: "Selected systems:\n\n01  Zyou Lens | MCP observability and AI insights\n02  Marketing MCP Servers | reliable tools for Meta and Google Ads\n03  MCP Store | one click MCP installation\n04  Campaign Radio | voice interface for campaign operations",
-  about: "Pratham is a founder minded AI engineer building the infrastructure behind intelligent marketing systems. His work sits at the intersection of MCP, agents, adtech, developer tools, and unconventional interfaces.",
-  stack: "TypeScript · Python · Next.js · React · Node.js · LangGraph · Vercel AI SDK · MCP · Redis · PostgreSQL · Docker",
-  experience: "2024 to now   Full Stack AI Developer at Leapx\n2022 to 2023  Software Engineering Intern at ISRO\n2022          Project Intern at Dreamsol",
-  writing: "Read Pratham's notes on production AI infrastructure at substack.com/@prathamchauhan1",
-  contact: "Email: chauhanpratham22@gmail.com\nGitHub: github.com/Pratham271\nX: x.com/Pratham9474\nLinkedIn: linkedin.com/in/pratham-chauhan-0812ba1a0/",
-};
-
-type Direction = "next" | "prev";
-type Role = "center" | "left" | "right" | "back";
+import { useState } from "react";
+import Hero from "@/components/portfolio/Hero";
+import SiteChrome from "@/components/portfolio/SiteChrome";
+import TerminalAssistant from "@/components/portfolio/TerminalAssistant";
 
 export default function Home() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
-  const [dark, setDark] = useState(false);
-  const [navFormed, setNavFormed] = useState(false);
-  const [command, setCommand] = useState("");
-  const [history, setHistory] = useState<{ command: string; answer: string }[]>([]);
-  const terminalInput = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    IMAGES.forEach(({ src }) => { const image = new Image(); image.src = src; });
-    const scroll = () => setNavFormed(window.scrollY > 48);
-    scroll();
-    window.addEventListener("scroll", scroll, { passive: true });
-    return () => window.removeEventListener("scroll", scroll);
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = dark ? "dark" : "light";
-  }, [dark]);
-
-  useEffect(() => {
-    if (terminalOpen) window.setTimeout(() => terminalInput.current?.focus(), 220);
-  }, [terminalOpen]);
-
-  const roles = useMemo(() => ({
-    center: activeIndex,
-    left: (activeIndex + 3) % 4,
-    right: (activeIndex + 1) % 4,
-    back: (activeIndex + 2) % 4,
-  }), [activeIndex]);
-
-  const navigate = (direction: Direction) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setActiveIndex(previous => direction === "next" ? (previous + 1) % 4 : (previous + 3) % 4);
-    window.setTimeout(() => setIsAnimating(false), 650);
-  };
-
-  const roleFor = (index: number): Role => {
-    if (index === roles.center) return "center";
-    if (index === roles.left) return "left";
-    if (index === roles.right) return "right";
-    return "back";
-  };
-
-  const runCommand = (event: FormEvent) => {
-    event.preventDefault();
-    const value = command.trim();
-    if (!value) return;
-    if (value.toLowerCase() === "clear") setHistory([]);
-    else setHistory(items => [...items, { command: value, answer: answerFor(value.toLowerCase()) }]);
-    setCommand("");
-  };
-
-  const persona = PERSONAS[activeIndex];
 
   return (
     <main>
-      <section className="toonHero" style={{ backgroundColor: IMAGES[activeIndex].bg }} id="top">
-        <div className="toonGrain" />
-        <div className="toonGhost">{persona.ghost}</div>
-        <div className="carousel" aria-label="Pratham's working modes">
-          {IMAGES.map((image, index) => {
-            const role = roleFor(index);
-            return <div className={`character character-${role}${index === 1 ? " character-green" : ""}`} key={image.src} aria-hidden={role !== "center"}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={image.src} alt={role === "center" ? `${PERSONAS[index].label} character` : ""} draggable={false} />
-            </div>;
-          })}
-        </div>
-        <div className="personaCopy">
-          <p>{persona.label}</p>
-          <span>{persona.copy}</span>
-          <div className="carouselButtons">
-            <button onClick={() => navigate("prev")} aria-label="Previous character"><ArrowLeft size={26} strokeWidth={2.25} /></button>
-            <button onClick={() => navigate("next")} aria-label="Next character"><ArrowRight size={26} strokeWidth={2.25} /></button>
-          </div>
-        </div>
-        <a className="discover" href="#experience">DISCOVER IT <ArrowRight strokeWidth={2.25} /></a>
-      </section>
-
-      <header className={`siteHeader shell ${navFormed ? "formed" : ""}`}>
-        <a className="brand" href="#top">PC<span>.</span></a>
-        <nav><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#writing">Writing</a><a href="#about">About</a></nav>
-        <div><button className="themeButton" onClick={() => setDark(value => !value)} aria-label="Toggle theme">{dark ? <Sun size={17} /> :
-          <Moon size={17} />}</button><button onClick={() => setTerminalOpen(true)} aria-label="Open terminal"><Terminal size={17} /></button></div>
-      </header>
+      <Hero />
+      <SiteChrome openTerminal={() => setTerminalOpen(true)} />
 
       <section className="manifesto shell sectionPad">
         <p className="kicker">01 / WHAT I DO</p>
@@ -160,23 +53,7 @@ export default function Home() {
       <section className="contact shell sectionPad"><p className="kicker">LET&apos;S BUILD</p><h2>Something that doesn&apos;t need another dashboard.</h2><a href="mailto:chauhanpratham22@gmail.com">chauhanpratham22@gmail.com ↗</a><div className="contactLinks"><a href="https://github.com/Pratham271">GitHub</a><a href="https://www.linkedin.com/in/pratham-chauhan-0812ba1a0/">LinkedIn</a><a href="https://x.com/Pratham9474">X</a><a href="https://substack.com/@prathamchauhan1">Substack</a><a href="/Resume.pdf">Resume</a></div></section>
 
       <footer className="footer shell"><span>Pratham Chauhan · Founder and AI engineer</span><span>AI · Product · Infrastructure</span></footer>
-      <button className={`floatingTerminal ${navFormed ? "visible" : ""}`} onClick={() => setTerminalOpen(true)}><Terminal size={15} /> ask about my work</button>
-
-      <div className={`terminalBackdrop ${terminalOpen ? "open" : ""}`} onMouseDown={event => { if (event.target === event.currentTarget) setTerminalOpen(false); }} aria-hidden={!terminalOpen}>
-        <div className="terminalWindow" role="dialog" aria-modal="true" aria-label="Portfolio terminal assistant">
-          <div className="terminalBar"><div><i /><i /><i /></div><span>pratham@portfolio:~</span><button onClick={() => setTerminalOpen(false)} aria-label="Close terminal">×</button></div>
-          <div className="terminalBody"><p className="muted">Pratham Portfolio Assistant v1.0</p><p>Type <b>help</b> to explore.</p>{history.map((item, index) => <div key={`${item.command}-${index}`}><p className="command">pratham@portfolio:~$ {item.command}</p><p className="answer">{item.answer}</p></div>)}<form onSubmit={runCommand}><span>pratham@portfolio:~$</span><input ref={terminalInput} value={command} onChange={event => setCommand(event.target.value)} autoComplete="off" spellCheck="false" aria-label="Terminal command" /></form></div>
-        </div>
-      </div>
+      <TerminalAssistant open={terminalOpen} onClose={() => setTerminalOpen(false)} />
     </main>
   );
-}
-
-function answerFor(query: string) {
-  if (RESPONSES[query]) return RESPONSES[query];
-  if (query.includes("zyou") || query.includes("lens")) return RESPONSES.work.split("\n")[2];
-  if (query.includes("mcp")) return "Pratham builds MCP servers for campaign creation, reporting, authentication, session state, and observability.";
-  if (query.includes("isro")) return "At ISRO, Pratham built a disaster management dashboard with GIS layers, flood visualisation, and emergency routing.";
-  if (query.includes("email") || query.includes("hire")) return RESPONSES.contact;
-  return "Try: help, work, about, stack, experience, writing, or contact.";
 }
