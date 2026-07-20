@@ -30,14 +30,17 @@ export default function Hero() {
     window.setTimeout(() => setIsAnimating(false), 650);
   };
   const persona = HERO_PERSONAS[activeIndex];
+  const titleBreak = Math.floor(persona.ghost.length / 2);
 
   return (
     <section className="sticky top-0 h-screen w-full overflow-hidden text-white transition-colors duration-[650ms]"
       style={{ backgroundColor: HERO_IMAGES[activeIndex].bg }} id="top">
       <div className="pointer-events-none absolute inset-0 z-50 opacity-40" />
-      <div className="pointer-events-none absolute inset-x-0 top-[18%] z-[2] flex justify-center whitespace-nowrap font-[Anton] text-[clamp(90px,28vw,380px)]
-        font-black leading-none tracking-[-.02em]">
-        {persona.ghost}
+      <div className="pointer-events-none absolute inset-x-0 top-[18%] z-[2] flex items-center justify-center gap-[40vw] whitespace-nowrap font-[Anton]
+        text-[clamp(90px,18vw,300px)] font-black leading-none tracking-[-.02em] max-sm:block max-sm:text-center max-sm:text-[30vw]">
+        <span className="w-[30vw] text-right max-sm:hidden">{persona.ghost.slice(0, titleBreak)}</span>
+        <span className="w-[30vw] text-left max-sm:hidden">{persona.ghost.slice(titleBreak)}</span>
+        <span className="hidden max-sm:block">{persona.ghost}</span>
       </div>
       <div className="absolute inset-0 z-[3]" aria-label="Pratham's working modes">
         {HERO_IMAGES.map((image, index) => {
