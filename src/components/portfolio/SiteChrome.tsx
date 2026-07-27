@@ -45,6 +45,7 @@ export default function SiteChrome({
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
           <a href="#writing">Writing</a>
+          <a href="#books">Books</a>
           <a href="#about">About</a>
         </nav>
 

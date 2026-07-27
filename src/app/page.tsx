@@ -4,6 +4,7 @@ import { useState } from "react";
 import Hero from "@/components/portfolio/Hero";
 import SiteChrome from "@/components/portfolio/SiteChrome";
 import TerminalAssistant from "@/components/portfolio/TerminalAssistant";
+import Bookshelf from "@/components/portfolio/Bookshelf";
 import { BUILD_LOG, TRACE_ENTRIES } from "@/constants/portfolio";
 
 export default function Home() {
@@ -228,6 +229,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Bookshelf />
 
       <section className="mx-auto grid w-[min(1180px,calc(100%_-_40px))] grid-cols-[1.2fr_.8fr] gap-20 border-t border-[var(--line)] py-[120px]
         max-md:grid-cols-1 max-sm:w-[calc(100%_-_24px)] max-sm:py-[84px]" id="about">
