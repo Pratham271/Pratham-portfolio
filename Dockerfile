@@ -1,11 +1,11 @@
-FROM node:20
+FROM oven/bun:1.3.11
 
 WORKDIR /pratham/src/app
 
-COPY package* .
+COPY package.json bun.lock ./
 
-RUN npm install
+RUN bun install --frozen-lockfile
 
 COPY . .
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "bun", "run", "dev" ]
