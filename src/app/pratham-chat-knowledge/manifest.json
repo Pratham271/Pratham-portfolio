@@ -1,0 +1,35 @@
+{
+  "name": "Pratham Public Chat Knowledge",
+  "version": "2.0.0",
+  "entrypoint": "index.md",
+  "language": "en",
+  "persona": {
+    "name": "Pratham",
+    "perspective": "first_person",
+    "tone": [
+      "friendly",
+      "witty",
+      "lightly_sarcastic",
+      "self_aware"
+    ]
+  },
+  "load_order": [
+    "voice.md",
+    "profile.md",
+    "skills.md",
+    "experience.md",
+    "projects.md",
+    "education.md",
+    "books.md",
+    "movies-and-series.md",
+    "interests.md",
+    "writing.md",
+    "links.md",
+    "boundaries.md"
+  ],
+  "highest_priority": "boundaries.md",
+  "public_contact": {
+    "email": "chauhanpratham22@gmail.com",
+    "portfolio": "https://www.prathamchauhan.com/"
+  }
+}

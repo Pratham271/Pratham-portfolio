@@ -1,9 +1,11 @@
 "use client";
 
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport, type UIMessage } from "ai";
 import type { FormEvent, RefObject } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Terminal } from "lucide-react";
-import { ANSWERS, COMMANDS, PC_LOGO } from "@/constants/terminal";
+import { COMMANDS, PC_LOGO } from "@/constants/terminal";
 
 type Entry = {
   prompt: string;
@@ -13,15 +15,20 @@ type Entry = {
 type PromptProps = {
   input: string;
   setInput: (value: string) => void;
-  submit: (event: FormEvent) => void;
+  submit: (event: FormEvent<HTMLFormElement>) => void | Promise<void>;
   inputRef: RefObject<HTMLInputElement>;
   label?: string;
   onRecall: (direction: -1 | 1) => void;
   onClear: () => void;
+  isBusy?: boolean;
+  onStop?: () => void;
 };
 
 type ChatUIProps = Omit<PromptProps, "label"> & {
-  history: Entry[];
+  messages: UIMessage[];
+  status: "submitted" | "streaming" | "ready" | "error";
+  error?: Error;
+  retry: () => void;
 };
 
 export default function TerminalAssistant({
@@ -37,6 +44,20 @@ export default function TerminalAssistant({
   const [commands, setCommands] = useState<string[]>([]);
   const [commandIndex, setCommandIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
+  const transport = useMemo(
+    () => new DefaultChatTransport({ api: "/api/chat" }),
+    [],
+  );
+  const {
+    messages,
+    sendMessage,
+    status: chatStatus,
+    error: chatError,
+    stop,
+    regenerate,
+    setMessages,
+  } = useChat({ transport });
+  const isChatBusy = chatStatus === "submitted" || chatStatus === "streaming";
 
   useEffect(() => {
     if (open) window.setTimeout(() => inputRef.current?.focus(), 220);
@@ -51,11 +72,11 @@ export default function TerminalAssistant({
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [onClose]);
 
-  const submit = (event: FormEvent) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const value = input.trim();
-    if (!value) return;
+    if (!value || (mode === "chat" && isChatBusy)) return;
 
     setCommands((items) =>
       items.at(-1) === value ? items : [...items, value],
@@ -66,29 +87,38 @@ export default function TerminalAssistant({
 
     if (mode === "shell" && query === "pc --init") {
       setMode("chat");
-      setHistory([]);
+      setMessages([]);
     } else if (
       (mode === "shell" && query === "clear") ||
       (mode === "chat" && query === "/clear")
     ) {
-      setHistory([]);
+      if (mode === "chat") setMessages([]);
+      else setHistory([]);
     } else if (
       (mode === "shell" && query === "exit") ||
       (mode === "chat" && query === "/exit")
     ) {
-      if (mode === "chat") setMode("shell");
+      if (mode === "chat") {
+        stop();
+        setMode("shell");
+      }
       else onClose();
-    } else {
-      const answer =
-        mode === "shell" && query === "history"
-          ? [...commands, value]
-              .map((item, index) => `${index + 1}  ${item}`)
-              .join("\n")
-          : mode === "shell"
-            ? shellAnswer(value)
-            : chatAnswer(value);
-
+    } else if (mode === "shell") {
+      const answer = query === "history"
+        ? [...commands, value]
+            .map((item, index) => `${index + 1}  ${item}`)
+            .join("\n")
+        : shellAnswer(value);
       setHistory((items) => [...items, { prompt: value, answer }]);
+    } else {
+      setInput("");
+      try {
+        await sendMessage({ text: value });
+      } catch (error) {
+        console.error("Could not send chat message:", error);
+        setInput(value);
+      }
+      return;
     }
 
     setInput("");
@@ -153,13 +183,18 @@ export default function TerminalAssistant({
           </>
         ) : (
           <ChatUI
-            history={history}
+            messages={messages}
+            status={chatStatus}
+            error={chatError}
             input={input}
             setInput={setInput}
             submit={submit}
             inputRef={inputRef}
             onRecall={recallCommand}
-            onClear={() => setHistory([])}
+            onClear={() => setMessages([])}
+            isBusy={isChatBusy}
+            onStop={stop}
+            retry={() => void regenerate()}
           />
         )}
       </section>
@@ -233,6 +268,8 @@ function Prompt({
   label,
   onRecall,
   onClear,
+  isBusy,
+  onStop,
 }: PromptProps) {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "ArrowUp" || event.key === "ArrowDown") {
@@ -275,22 +312,39 @@ function Prompt({
         onKeyDown={handleKeyDown}
         autoComplete="off"
         spellCheck="false"
+        disabled={isBusy}
         aria-label={label ? "Terminal command" : "Chat message"}
-        placeholder={label ? undefined : "Ask about Pratham's work"}
+        placeholder={label ? undefined : isBusy ? "Generating response…" : "Ask about Pratham's work"}
       />
+      {isBusy && !label && (
+        <button className="text-[10px] text-[#d9856d] uppercase" type="button" onClick={onStop}>
+          Stop
+        </button>
+      )}
     </form>
   );
 }
 
 function ChatUI({
-  history,
+  messages,
+  status,
+  error,
+  retry,
   input,
   setInput,
   submit,
   inputRef,
   onRecall,
   onClear,
+  isBusy,
+  onStop,
 }: ChatUIProps) {
+  const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, status]);
+
   return (
     <div className="grid h-full grid-rows-[46px_1fr_auto] bg-[#151411]">
       <header className="grid grid-cols-[1fr_auto_1fr] items-center border-b border-[#37332d] px-[18px] text-[11px] text-[#9f978b] max-sm:grid-cols-[1fr_auto]">
@@ -301,8 +355,8 @@ function ChatUI({
         <span className="justify-self-end">v1.0.0</span>
       </header>
 
-      <div className="overflow-auto px-[clamp(20px,5vw,54px)] py-[30px]">
-        {history.length === 0 && (
+      <div className="overflow-auto px-[clamp(20px,5vw,54px)] py-[30px]" aria-live="polite">
+        {messages.length === 0 && (
           <div className="mt-2.5 mb-[42px]">
             <pre className="mb-[22px] font-[DM_Mono] text-xs leading-[1.05] font-bold text-[#dfaa52]">
               {PC_LOGO}
@@ -316,7 +370,35 @@ function ChatUI({
             </span>
           </div>
         )}
-        <History entries={history} />
+        {messages.map((message) => (
+          <div className="mb-7 whitespace-pre-wrap" key={message.id}>
+            {message.role === "user" ? (
+              <p className="mb-4 text-[#eee5d8]">
+                <span className="font-bold text-[#e1ad55]">›</span>{" "}
+                {message.parts.map((part) => part.type === "text" ? part.text : "").join("")}
+              </p>
+            ) : (
+              <div className="m-0 border-l border-[#443f37] pl-[22px] leading-7 text-[#d6d0c6]">
+                <span className="mb-2 ml-[-23px] block pl-5 text-[10px] font-bold text-[#d9856d]">
+                  ● PC
+                </span>
+                {message.parts.map((part, index) =>
+                  part.type === "text" ? <span key={index}>{part.text}</span> : null,
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+        {status === "submitted" && (
+          <p className="text-[11px] text-[#918a80]">Thinking, or doing a convincing simulation of it…</p>
+        )}
+        {error && (
+          <div className="border-l border-[#d66f62] pl-4 text-xs text-[#dc917a]">
+            <p>Something went wrong while generating the response.</p>
+            <button className="mt-2 underline" type="button" onClick={retry}>Try again</button>
+          </div>
+        )}
+        <div ref={endRef} />
       </div>
 
       <div className="px-[clamp(14px,5vw,54px)] pb-[18px]">
@@ -327,6 +409,8 @@ function ChatUI({
           inputRef={inputRef}
           onRecall={onRecall}
           onClear={onClear}
+          isBusy={isBusy}
+          onStop={onStop}
         />
         <small className="mt-2 block text-right text-[9px] text-[#777066] max-sm:text-left">
           Enter to send · ↑↓ history · Ctrl+C cancel · Ctrl+L clear · /exit
@@ -341,26 +425,4 @@ function shellAnswer(value: string) {
   if (value.toLowerCase() === "date") return new Date().toLocaleString();
 
   return COMMANDS[value.toLowerCase()] ?? `command not found: ${value}\nTry 'help'.`;
-}
-
-function chatAnswer(value: string) {
-  const query = value.toLowerCase();
-  const match = Object.keys(ANSWERS).find((key) => query.includes(key));
-
-  if (query.includes("zyou") || query.includes("mcp")) {
-    return "At Zyou, Pratham builds marketing infrastructure for AI: MCP servers, campaign operations, reporting, auth, session state, and SDKs.";
-  }
-
-  if (query.includes("isro")) {
-    return "At ISRO, Pratham built a disaster management dashboard with GIS layers, flood visualisation, emergency routing, and nearby hospital discovery.";
-  }
-
-  if (query.includes("email") || query.includes("hire")) {
-    return ANSWERS.contact;
-  }
-
-  return (
-    (match && ANSWERS[match]) ??
-    "I can help with Pratham's projects, experience, stack, writing, or contact details."
-  );
 }
