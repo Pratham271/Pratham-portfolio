@@ -2,16 +2,24 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.VERCEL_PROJECT_PRODUCTION_URL
-      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-      : "http://localhost:3000",
-  ),
+  metadataBase: new URL("https://www.prathamchauhan.com"),
   title: "Pratham Chauhan | Founder & AI Engineer",
   description: "Founder-minded AI engineer building agent infrastructure, developer tools, and useful product experiences.",
   icons: "/logo.png",
   openGraph: {
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    type: "website",
+    url: "/",
+    siteName: "Pratham Chauhan",
+    images: [{
+      url: "/og-image.png",
+      width: 1200,
+      height: 630,
+      alt: "Pratham Chauhan — building the infrastructure behind intelligent products",
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png"],
   },
 };
 
