@@ -1,7 +1,7 @@
 "use client";
 
 import { type TouchEvent, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Github, Linkedin } from "lucide-react";
 import {
   HERO_IMAGES,
   HERO_PERSONAS,
@@ -31,7 +31,7 @@ export default function Hero() {
     window.setTimeout(() => setIsAnimating(false), 650);
   };
   const persona = HERO_PERSONAS[activeIndex];
-  const titleBreak = Math.floor(persona.ghost.length / 2);
+  const SocialIcon = activeIndex === 1 ? Github : Linkedin;
   const handleSwipe = ({ changedTouches }: TouchEvent) => {
     const { clientX: x, clientY: y } = changedTouches[0];
     const dx = x - swipeStart.current.x;
@@ -44,12 +44,7 @@ export default function Hero() {
       style={{ backgroundColor: HERO_IMAGES[activeIndex].bg }} id="top"
       onTouchStart={({ touches }) => { swipeStart.current = { x: touches[0].clientX, y: touches[0].clientY }; }} onTouchEnd={handleSwipe}>
       <div className="pointer-events-none absolute inset-0 z-50 opacity-40" />
-      <div className="pointer-events-none absolute inset-x-0 top-[18%] z-[2] flex items-center justify-center gap-[40vw] whitespace-nowrap font-[Anton]
-        text-[clamp(90px,18vw,300px)] font-black leading-none tracking-[-.02em] max-sm:block max-sm:text-center max-sm:text-[30vw]">
-        <span className="w-[30vw] text-right max-sm:hidden">{persona.ghost.slice(0, titleBreak)}</span>
-        <span className="w-[30vw] text-left max-sm:hidden">{persona.ghost.slice(titleBreak)}</span>
-        <span className="hidden max-sm:block">{persona.ghost}</span>
-      </div>
+      <h1 className="hero-word hero-word-fill">{persona.ghost}</h1>
       <div className="absolute inset-0 z-[3]" aria-label="Pratham's working modes">
         {HERO_IMAGES.map((image, index) => {
           const role = roleFor(index);
@@ -62,6 +57,21 @@ export default function Hero() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className={`h-full w-full object-contain object-bottom ${index === 1 ? "origin-bottom scale-[.88]" : ""}`}
               src={image.src} alt={role === "center" ? `${HERO_PERSONAS[index].label} character` : ""} draggable={false} />
+            {role === "center" && persona.link && (
+              <a
+                className={`hero-callout hero-callout-${index}`}
+                href={persona.link.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Visit my ${persona.link.label}`}
+              >
+                {activeIndex === 3 ? (
+                  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                    <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                ) : <SocialIcon size={20} />}
+              </a>
+            )}
           </div>;
         })}
       </div>

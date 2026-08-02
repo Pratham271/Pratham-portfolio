@@ -1,92 +1,68 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpen, Bookmark } from "lucide-react";
+import { BookOpen, Bookmark, ExternalLink } from "lucide-react";
 
 const BOOKS = [
   {
-    title: "The Pragmatic Programmer",
-    shortTitle: "Pragmatic Programmer",
-    author: "David Thomas & Andrew Hunt",
-    category: "Craft",
-    status: "Read",
-    date: "Mar 2023",
-    impact: "9.2",
-    color: "#b95745",
-    ink: "#fff8ec",
-    takeaway: "Care about the tiny decisions. They compound into the quality of the whole system.",
+    title: "Mathematics for Machine Learning",
+    shortTitle: "Mathematics for ML",
+    author: "Marc Peter Deisenroth, A. Aldo Faisal & Cheng Soon Ong",
+    category: "Foundations",
+    status: "On shelf",
+    color: "#167f91",
+    ink: "#f8f3df",
+    cover: "/books/mathematics-for-machine-learning.jpg",
+    href: "https://www.amazon.co.uk/dp/110845514X",
+    takeaway: "The linear algebra, geometry, calculus, probability, and optimisation beneath machine learning.",
   },
   {
-    title: "The Design of Everyday Things",
-    shortTitle: "Everyday Things",
-    author: "Don Norman",
-    category: "Design",
-    status: "Read",
-    date: "Aug 2023",
-    impact: "8.8",
-    color: "#e5bd61",
-    ink: "#342719",
-    takeaway: "When someone struggles with a product, start by questioning the design—not the person.",
+    title: "Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow",
+    shortTitle: "Hands-On ML",
+    author: "Aurélien Géron",
+    category: "Practice",
+    status: "On shelf",
+    color: "#eadbb6",
+    ink: "#29231d",
+    cover: "/books/hands-on-machine-learning.jpg",
+    href: "https://www.amazon.co.uk/dp/1098125975",
+    takeaway: "A practical path from preparing real data to training and deploying modern machine-learning systems.",
   },
   {
-    title: "Deep Work",
-    shortTitle: "Deep Work",
-    author: "Cal Newport",
-    category: "Focus",
-    status: "Read",
-    date: "Jan 2024",
-    impact: "8.4",
-    color: "#315b6e",
-    ink: "#f7f0e5",
-    takeaway: "The ability to focus without distraction is a practical advantage worth protecting.",
+    title: "Understanding Deep Learning",
+    shortTitle: "Deep Learning",
+    author: "Simon J. D. Prince",
+    category: "Deep learning",
+    status: "On shelf",
+    color: "#3b8992",
+    ink: "#f4f6ed",
+    cover: "/books/understanding-deep-learning.jpg",
+    href: "https://www.amazon.in/dp/0262048647",
+    takeaway: "An intuitive and mathematical guide to the ideas behind modern neural networks.",
   },
   {
-    title: "Zero to One",
-    shortTitle: "Zero to One",
-    author: "Peter Thiel",
-    category: "Startups",
-    status: "Read",
-    date: "Apr 2024",
-    impact: "8.7",
-    color: "#272522",
-    ink: "#efe6d8",
-    takeaway: "The interesting question is not how to compete better, but what useful thing nobody else is building.",
+    title: "Practical Statistics for Data Scientists",
+    shortTitle: "Practical Statistics",
+    author: "Peter Bruce, Andrew Bruce & Peter Gedeck",
+    category: "Statistics",
+    status: "On shelf",
+    color: "#cf593f",
+    ink: "#fff9ed",
+    cover: "/books/practical-statistics.webp",
+    href: "https://www.amazon.in/dp/8194435005",
+    takeaway: "The essential statistical concepts for working with data, explained through R and Python.",
   },
   {
-    title: "The Mom Test",
-    shortTitle: "The Mom Test",
-    author: "Rob Fitzpatrick",
-    category: "Product",
-    status: "Read",
-    date: "Sep 2024",
-    impact: "9.0",
-    color: "#d58a74",
-    ink: "#2e211d",
-    takeaway: "Good customer conversations uncover real behaviour instead of collecting polite validation.",
-  },
-  {
-    title: "Designing Data-Intensive Applications",
+    title: "Designing Data-Intensive Applications, 2nd Edition",
     shortTitle: "Data-Intensive Apps",
-    author: "Martin Kleppmann",
+    author: "Martin Kleppmann & Chris Riccomini",
     category: "Systems",
-    status: "Reading",
-    date: "Now",
-    impact: "—",
+    status: "Reading now",
     color: "#899b76",
     ink: "#152015",
-    takeaway: "Reliability comes from understanding the trade-offs beneath abstractions, not trusting the happy path.",
-  },
-  {
-    title: "Build",
-    shortTitle: "Build",
-    author: "Tony Fadell",
-    category: "Building",
-    status: "Up next",
-    date: "Next",
-    impact: "—",
-    color: "#a99abc",
-    ink: "#241d2c",
-    takeaway: "On my shelf for the next chapter: turning product judgment into a repeatable craft.",
+    cover: "/books/designing-data-intensive-applications.webp",
+    href: "https://www.amazon.in/dp/9368089043",
+    takeaway: "A current study of the trade-offs behind reliable, scalable, and maintainable data systems.",
   },
 ] as const;
 
@@ -100,10 +76,10 @@ export default function Bookshelf() {
         <p className="font-[DM_Mono] text-[11px] tracking-[.14em] text-[var(--muted)]">04 / MY SHELF</p>
         <div>
           <h2 className="m-0 max-w-[900px] text-[clamp(42px,5vw,72px)] leading-[1.02] tracking-[-.045em]">
-            Books that changed how I think, build, and work.
+            Books shaping how I think about machine learning, data, and systems.
           </h2>
           <p className="mt-6 max-w-[680px] text-lg leading-[1.7] text-[var(--muted)]">
-            Not a reading list. A small record of ideas I carried into the work.
+            A working shelf of references, with the current read marked.
           </p>
         </div>
       </div>
@@ -140,19 +116,26 @@ export default function Bookshelf() {
         <aside className="flex min-h-[520px] flex-col bg-[#f7eddd] p-10 text-[#2f261f] max-sm:min-h-0 max-sm:p-6" aria-live="polite">
           <div className="flex items-center justify-between font-[DM_Mono] text-[10px] tracking-[.12em] text-[#77695d]">
             <span>{String(selected + 1).padStart(2, "0")} / {String(BOOKS.length).padStart(2, "0")}</span>
-            <span className={book.status === "Reading" ? "rounded-full bg-[#9aaf82] px-3 py-1.5 text-[#172016]" : ""}>{book.status}</span>
+            <span className={book.status === "Reading now" ? "rounded-full bg-[#9aaf82] px-3 py-1.5 text-[#172016]" : ""}>{book.status}</span>
           </div>
-          <div className="my-auto py-12">
-            <BookOpen className="mb-7 text-[#b75e49]" size={28} strokeWidth={1.6} />
-            <p className="mb-3 font-[DM_Mono] text-[10px] tracking-[.14em] text-[#b75e49] uppercase">{book.category} · {book.date}</p>
-            <h3 className="my-0 font-[Instrument_Serif] text-[clamp(44px,5vw,66px)] leading-[.95] font-normal">{book.title}</h3>
-            <p className="mt-4 text-sm text-[#77695d]">by {book.author}</p>
-            <blockquote className="mt-10 border-l-2 border-[#d98b70] pl-5 text-lg leading-[1.65]">“{book.takeaway}”</blockquote>
+          <div className="my-auto py-10">
+            <div className="grid grid-cols-[112px_1fr] items-end gap-6 max-sm:grid-cols-[92px_1fr] max-sm:gap-4">
+              <a href={book.href} target="_blank" rel="noreferrer" aria-label={`View ${book.title} on Amazon`}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="aspect-[.72] w-full rounded-sm object-cover shadow-[0_14px_25px_rgb(47_38_31_/_28%)]" src={book.cover} alt={`${book.title} cover`} />
+              </a>
+              <div>
+                <BookOpen className="mb-5 text-[#b75e49]" size={24} strokeWidth={1.6} />
+                <p className="mb-3 font-[DM_Mono] text-[10px] tracking-[.14em] text-[#b75e49] uppercase">{book.category}</p>
+                <h3 className="my-0 font-[Instrument_Serif] text-[clamp(34px,3vw,46px)] leading-[.95] font-normal">{book.title}</h3>
+                <p className="mt-3 text-xs leading-relaxed text-[#77695d]">by {book.author}</p>
+              </div>
+            </div>
+            <p className="mt-8 border-l-2 border-[#d98b70] pl-5 text-base leading-[1.65]">{book.takeaway}</p>
           </div>
-          <div className="flex items-end justify-between border-t border-[#2f261f]/15 pt-5">
-            <span className="font-[DM_Mono] text-[10px] tracking-[.12em] text-[#77695d]">PERSONAL IMPACT</span>
-            <strong className="font-[Instrument_Serif] text-4xl font-normal">{book.impact}<small className="text-base text-[#77695d]"> / 10</small></strong>
-          </div>
+          <a className="flex items-center justify-between border-t border-[#2f261f]/15 pt-5 font-[DM_Mono] text-[10px] tracking-[.12em] text-[#77695d] hover:text-[#b75e49]" href={book.href} target="_blank" rel="noreferrer">
+            VIEW BOOK <ExternalLink size={15} />
+          </a>
         </aside>
       </div>
     </section>

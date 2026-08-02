@@ -28,6 +28,39 @@ html { scroll-behavior: smooth; }
 body { margin: 0; overflow-x: hidden; background: var(--bg); color: var(--text); font-family: Inter, sans-serif; transition: background .5s, color .5s; }
 button, a { cursor: pointer; }
 
+.hero-word {
+  position: absolute;
+  top: 18%;
+  left: 6vw;
+  z-index: 2;
+  width: 44vw;
+  margin: 0;
+  white-space: nowrap;
+  text-align: left;
+  font: 900 clamp(80px, 12vw, 210px)/1 Anton, sans-serif;
+  letter-spacing: -.02em;
+}
+.hero-word-fill { z-index: 2; color: white; }
+.hero-callout {
+  position: absolute;
+  z-index: 40;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 42%);
+  border-radius: 50%;
+  background: rgb(23 20 17 / 78%);
+  box-shadow: 0 14px 35px rgb(23 20 17 / 22%);
+  backdrop-filter: blur(12px);
+  transform: translate(-50%, -50%);
+  transition: transform .2s ease, background .2s ease;
+}
+.hero-callout:hover { background: rgb(23 20 17 / 92%); transform: translate(-50%, -50%) scale(1.08); }
+.hero-callout-1 { top: 32%; left: 73%; }
+.hero-callout-2 { top: 33%; left: 27%; }
+.hero-callout-3 { top: 38%; left: 22%; }
+
 .books-section {
   background:
     radial-gradient(circle at 14% 22%, rgb(217 133 109 / 16%), transparent 24rem),
@@ -177,7 +210,12 @@ button, a { cursor: pointer; }
   .book-spine { width: 72px; }
 }
 
-@media (max-width: 639px) { #top { --hero-scale: 1; } }
+@media (max-width: 639px) {
+  #top { --hero-scale: 1; }
+  .hero-word { inset: 18% 0 auto; width: auto; text-align: center; font-size: 28vw; }
+  .hero-callout { width: 34px; height: 34px; }
+  .hero-callout svg { width: 16px; height: 16px; }
+}
 
 @supports (animation-timeline: view()) {
   .world-reveal {

@@ -10,21 +10,25 @@ export const HERO_PERSONAS = [
     label: "BUILDER MODE",
     ghost: "BUILD",
     copy: "I turn ambitious ideas into focused products, reliable systems, and software people can actually use.",
+    link: null,
   },
   {
     label: "AGENT MODE",
     ghost: "AGENTS",
     copy: "I build AI agents, MCP servers, infrastructure, and integrations that keep working beyond the demo.",
+    link: { label: "GitHub", href: "https://github.com/Pratham271" },
   },
   {
     label: "PRODUCT MODE",
     ghost: "CRAFT",
     copy: "I make complex technology feel direct, useful, and unusually polished.",
+    link: { label: "LinkedIn", href: "https://www.linkedin.com/in/pratham-chauhan-0812ba1a0/" },
   },
   {
     label: "SHIP MODE",
     ghost: "SCALE",
     copy: "I work from first prototype to production, connecting product thinking with full stack engineering.",
+    link: { label: "X", href: "https://x.com/Pratham9474" },
   },
 ] as const;
 
